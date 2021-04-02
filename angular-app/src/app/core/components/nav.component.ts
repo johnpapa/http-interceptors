@@ -14,11 +14,14 @@ const captains = console;
         <a routerLink="/home" routerLinkActive="router-link-active">
           <span>Home</span>
         </a>
+        <a routerLink="/movies" routerLinkActive="router-link-active">
+          <span>My Movies</span>
+        </a>
         <a routerLink="/heroes" routerLinkActive="router-link-active">
           <span>Heroes</span>
         </a>
-        <a routerLink="/movies" routerLinkActive="router-link-active">
-          <span>My Movies</span>
+        <a routerLink="/villains" routerLinkActive="router-link-active">
+          <span>Villains</span>
         </a>
       </ul>
     </nav>
