@@ -5,43 +5,41 @@ import {
   Output,
   ChangeDetectionStrategy,
 } from '@angular/core';
-import { Product } from '../core';
+import { Hero } from '../core';
 
 @Component({
-  selector: 'app-product-list',
+  selector: 'app-hero-list',
   template: `
     <div *ngIf="errorMessage">
       {{ errorMessage }}
     </div>
-    <div *ngIf="!products?.length && !errorMessage">
-      Loading data ...
-    </div>
+    <div *ngIf="!heroes?.length && !errorMessage">Loading data ...</div>
     <ul class="list">
       <li
         role="presentation"
-        *ngFor="let product of products; trackBy: trackByProduct; let i = index"
+        *ngFor="let hero of heroes; trackBy: trackByHero; let i = index"
       >
         <div class="card">
           <app-card-content
-            [name]="product.name"
-            [description]="product.description"
+            [name]="hero.name"
+            [description]="hero.description"
           ></app-card-content>
           <footer class="card-footer">
             <app-button-footer
               class="card-footer-item"
               [className]="'delete-item'"
               [iconClasses]="'fas fa-trash'"
-              (clicked)="deleteProduct($event)"
+              (clicked)="deleteHero($event)"
               label="Delete"
-              [item]="product"
+              [item]="hero"
             ></app-button-footer>
             <app-button-footer
               class="card-footer-item"
               [className]="'edit-item'"
               [iconClasses]="'fas fa-edit'"
-              (clicked)="selectProduct($event)"
+              (clicked)="selectHero($event)"
               label="Edit"
-              [item]="product"
+              [item]="hero"
             ></app-button-footer>
           </footer>
         </div>
@@ -50,21 +48,21 @@ import { Product } from '../core';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ProductListComponent {
+export class HeroListComponent {
   @Input() errorMessage = undefined;
-  @Input() products: Product[];
-  @Output() deleted = new EventEmitter<Product>();
-  @Output() selected = new EventEmitter<Product>();
+  @Input() heroes: Hero[];
+  @Output() deleted = new EventEmitter<Hero>();
+  @Output() selected = new EventEmitter<Hero>();
 
-  trackByProduct(index: number, product: Product): number {
-    return product.id;
+  trackByHero(index: number, hero: Hero): number {
+    return hero.id;
   }
 
-  selectProduct(product: Product) {
-    this.selected.emit(product);
+  selectHero(hero: Hero) {
+    this.selected.emit(hero);
   }
 
-  deleteProduct(product: Product) {
-    this.deleted.emit(product);
+  deleteHero(hero: Hero) {
+    this.deleted.emit(hero);
   }
 }

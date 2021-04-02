@@ -6,7 +6,7 @@ import {
   HttpRequest,
   HttpErrorResponse,
 } from '@angular/common/http';
-import { Observable, throwError, EMPTY } from 'rxjs';
+import { Observable, of, throwError, EMPTY } from 'rxjs';
 
 import { SessionService } from '../session.service';
 import { prefixReq } from './http-config';
@@ -17,10 +17,16 @@ import { Router } from '@angular/router';
 export class AuthInterceptor implements HttpInterceptor {
   constructor(private router: Router, private sessionService: SessionService) {}
 
-  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+  intercept(
+    req: HttpRequest<any>,
+    next: HttpHandler,
+  ): Observable<HttpEvent<any>> {
     const authHeader = this.sessionService.accessToken;
     const authReq = req.clone({
-      setHeaders: { Authorization: `Bearer ${authHeader}`, 'Content-Type': 'application/json' },
+      setHeaders: {
+        Authorization: `Bearer ${authHeader}`,
+        'Content-Type': 'application/json',
+      },
       withCredentials: true,
     });
 
@@ -34,19 +40,20 @@ export class AuthInterceptor implements HttpInterceptor {
   handleErrors(source: Observable<HttpEvent<any>>): Observable<HttpEvent<any>> {
     return source.pipe(
       catchError((error: HttpErrorResponse) => {
-        return error.status === 401 ? this.handle401(error) : throwError(error);
-      })
+        // return error.status === 401 ? this.handle401(error) : throwError(error);
+        return throwError(error);
+      }),
     );
   }
 
-  handle401(error: HttpErrorResponse) {
-    const authResHeader = error.headers.get('WWW-Authenticate');
-    if (/is expired/.test(authResHeader)) {
-      this.router.navigate(['signin']);
-      // this.sessionService.refreshToken();
-    } else {
-      this.router.navigate(['authfailed']);
-    }
-    return EMPTY;
-  }
+  // handle401(error: HttpErrorResponse) {
+  //   const authResHeader = error.headers.get('WWW-Authenticate');
+  //   if (/is expired/.test(authResHeader)) {
+  //     this.router.navigate(['signin']);
+  //     // this.sessionService.refreshToken();
+  //   } else {
+  //     this.router.navigate(['authfailed']);
+  //   }
+  //   return EMPTY;
+  // }
 }

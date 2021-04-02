@@ -1,18 +1,18 @@
 <script lang="ts">
   import { createEventDispatcher } from 'svelte';
   import { ButtonFooter, CardContent } from '../components';
-  import { Product } from '../models';
+  import { Hero } from '../models';
 
   const dispatch = createEventDispatcher();
-  export let products: Product[] = [];
+  export let heroes: Hero[] = [];
   export let errorMessage = '';
 
-  function deleteProduct(product: Product) {
-    dispatch('deleted', product);
+  function deleteHero(hero: Hero) {
+    dispatch('deleted', hero);
   }
 
-  function selectProduct(product: Product) {
-    dispatch('selected', product);
+  function selectHero(hero: Hero) {
+    dispatch('selected', hero);
   }
 
   const deleteOptions = {
@@ -32,11 +32,11 @@
   {#if errorMessage}
     <div>{errorMessage}</div>
   {/if}
-  {#if !products.length && !errorMessage}
+  {#if !heroes.length && !errorMessage}
     <div>Loading data ...</div>
   {/if}
   <ul class="list">
-    {#each products as { id, name, description }, i (id)}
+    {#each heroes as { id, name, description }, i (id)}
       <li role="presentation">
         <div class="card">
           <CardContent {name} {description} />
@@ -45,14 +45,16 @@
               {...deleteOptions}
               dataId={id}
               dataIndex={i}
-              item={products[i]}
-              on:clicked={() => deleteProduct(products[i])} />
+              item={heroes[i]}
+              on:clicked={() => deleteHero(heroes[i])}
+            />
             <ButtonFooter
               {...editOptions}
               dataId={id}
               dataIndex={i}
-              item={products[i]}
-              on:clicked={() => selectProduct(products[i])} />
+              item={heroes[i]}
+              on:clicked={() => selectHero(heroes[i])}
+            />
           </footer>
         </div>
       </li>

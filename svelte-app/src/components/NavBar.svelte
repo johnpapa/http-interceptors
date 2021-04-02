@@ -45,7 +45,7 @@
     <p class="menu-label">Menu</p>
     <ul class="menu-list">
       <Link to="/home" {getProps}>Home</Link>
-      <Link to="/products" {getProps}>Heroes</Link>
+      <Link to="/heroes" {getProps}>Heroes</Link>
       <Link to="/movies" {getProps}>My Movies</Link>
     </ul>
   </nav>

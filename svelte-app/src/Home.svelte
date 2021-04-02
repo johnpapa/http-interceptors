@@ -10,7 +10,7 @@
     <br />
     <div class="button-group">
       <button class="button" aria-label="Heroes" tabindex="0">
-        <Link to="/products"><i class="fas fa-clipboard-list" /> Heroes</Link>
+        <Link to="/heroes"><i class="fas fa-clipboard-list" /> Heroes</Link>
       </button>
       <button class="button" aria-label="My Movies">
         <Link to="/movies">

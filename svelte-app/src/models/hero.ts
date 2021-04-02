@@ -1,6 +1,5 @@
-export class Product {
+export class Hero {
   id: number;
   name: string;
   description: string;
-  quantity: number;
 }

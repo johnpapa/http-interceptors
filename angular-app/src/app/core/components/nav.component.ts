@@ -14,7 +14,7 @@ const captains = console;
         <a routerLink="/home" routerLinkActive="router-link-active">
           <span>Home</span>
         </a>
-        <a routerLink="/products" routerLinkActive="router-link-active">
+        <a routerLink="/heroes" routerLinkActive="router-link-active">
           <span>Heroes</span>
         </a>
         <a routerLink="/movies" routerLinkActive="router-link-active">
@@ -32,9 +32,9 @@ const captains = console;
         >
           <span>Sign in</span>
         </a>
-        <a *ngIf="loggedIn" (click)="signout()">
+        <!-- <a *ngIf="loggedIn" (click)="signout()">
           <span>Sign Out</span>
-        </a>
+        </a> -->
       </div>
     </nav>
     <div class="user">

@@ -15,7 +15,7 @@ export class LoggerService implements Logger {
   constructor(@Inject('env') private env) {}
 
   info(value: any): void {
-    if (!this.env.production) {
+    if (!this.env.heroion) {
       console.info(value);
     } else {
       // App Insights or your favorite service
@@ -23,7 +23,7 @@ export class LoggerService implements Logger {
   }
 
   log(value: any): void {
-    if (!this.env.production) {
+    if (!this.env.heroion) {
       console.log(value);
       // console.log(`%c${value}`, `color:blue`);
     } else {
@@ -32,7 +32,7 @@ export class LoggerService implements Logger {
   }
 
   warn(value: any): void {
-    if (!this.env.production) {
+    if (!this.env.heroion) {
       console.warn(value);
     } else {
       // App Insights or your favorite service
@@ -40,7 +40,7 @@ export class LoggerService implements Logger {
   }
 
   error(value: any): void {
-    if (!this.env.production) {
+    if (!this.env.heroion) {
       console.error(value);
     } else {
       // App Insights or your favorite service

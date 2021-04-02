@@ -40,8 +40,8 @@ export class MovieComponent {
   showAdd = false;
   movies$: Observable<Movie[]>;
 
-  constructor(private MovieService: MovieService) {
-    this.movies$ = MovieService.entities$;
+  constructor(private movieService: MovieService) {
+    this.movies$ = movieService.entities$;
   }
 
   ngOnInit() {
@@ -50,7 +50,7 @@ export class MovieComponent {
 
   getMovies() {
     this.errorMessage = undefined;
-    this.MovieService.getAll().subscribe(
+    this.movieService.getAll().subscribe(
       (_) => {
         /*.. do nothing for success.. */
       },

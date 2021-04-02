@@ -1,28 +1,28 @@
 <script lang="ts">
   import { onMount, createEventDispatcher } from 'svelte';
   import { ButtonFooter } from '../components';
-  import { Product } from '../models';
+  import { Hero } from '../models';
 
   const dispatch = createEventDispatcher();
-  export let product: Product;
-  let editingProduct = { ...product };
+  export let hero: Hero;
+  let editingHero = { ...hero };
 
-  onMount(() => watchProduct());
+  onMount(() => watchHero());
 
   function clear() {
     dispatch('unselect');
   }
 
-  function saveProduct() {
-    dispatch('save', editingProduct);
+  function saveHero() {
+    dispatch('save', editingHero);
     clear();
   }
 
-  function watchProduct() {
-    if (product && product.id) {
-      editingProduct = { ...product };
+  function watchHero() {
+    if (hero && hero.id) {
+      editingHero = { ...hero };
     } else {
-      editingProduct = { id: undefined, name: '', description: '' };
+      editingHero = { id: undefined, name: '', description: '' };
     }
   }
 
@@ -41,11 +41,11 @@
 
 <div class="card edit-detail">
   <header class="card-header">
-    <p class="card-header-title">{editingProduct.name}</p>
+    <p class="card-header-title">{editingHero.name}</p>
   </header>
   <div class="card-content">
     <div class="content">
-      {#if editingProduct.id}
+      {#if editingHero.id}
         <div class="field">
           <label class="label" for="id">id</label>
           <input
@@ -54,7 +54,8 @@
             placeholder="99999"
             readonly
             type="text"
-            bind:value={editingProduct.id} />
+            bind:value={editingHero.id}
+          />
         </div>
       {/if}
       <div class="field">
@@ -64,7 +65,8 @@
           name="name"
           placeholder="Oranges"
           type="text"
-          bind:value={editingProduct.name} />
+          bind:value={editingHero.name}
+        />
       </div>
       <div class="field">
         <label class="label" for="description">description</label>
@@ -73,27 +75,14 @@
           name="description"
           placeholder="box"
           type="text"
-          bind:value={editingProduct.description} />
-      </div>
-      <div class="field">
-        <label class="label" for="quantity">quantity</label>
-        <input
-          class="input"
-          name="quantity"
-          placeholder="1"
-          type="number"
-          min="1"
-          max="100"
-          bind:value={editingProduct.quantity} />
+          bind:value={editingHero.description}
+        />
       </div>
     </div>
   </div>
 
   <footer class="card-footer">
-    <ButtonFooter {...cancelOptions} item={editingProduct} on:clicked={clear} />
-    <ButtonFooter
-      {...saveOptions}
-      item={editingProduct}
-      on:clicked={saveProduct} />
+    <ButtonFooter {...cancelOptions} item={editingHero} on:clicked={clear} />
+    <ButtonFooter {...saveOptions} item={editingHero} on:clicked={saveHero} />
   </footer>
 </div>

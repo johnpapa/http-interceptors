@@ -12,7 +12,7 @@ import { Component } from '@angular/core';
 
         <div class="button-group">
           <button class="button" aria-label="Heroes" tabindex="0">
-            <a href="/products">
+            <a href="/heroes">
               <i class="fas fa-clipboard-list"></i>
               Heroes
             </a>
