@@ -2,19 +2,19 @@
   import { ListHeader } from './components';
 
   import { onMount } from 'svelte';
-  import { state, getDiscountsAction } from './store';
+  import { state, getMoviesAction } from './store';
 
   export const location: Object = {};
 
   let errorMessage: string = '';
-  let { discounts } = state;
+  let { movies } = state;
 
-  onMount(async () => await getDiscounts());
+  onMount(async () => await getMovies());
 
-  async function getDiscounts() {
+  async function getMovies() {
     errorMessage = '';
     try {
-      await getDiscountsAction();
+      await getMoviesAction();
     } catch (error) {
       errorMessage = 'Unauthorized';
     }
@@ -23,26 +23,26 @@
 </script>
 
 <div class="content-container">
-  <ListHeader title="My Discounts" on:refresh={getDiscounts} {showAdd} />
+  <ListHeader title="My Movies" on:refresh={getMovies} {showAdd} />
   <div>
     {#if errorMessage}
       <div>{errorMessage}</div>
     {/if}
-    {#if !$discounts.length && !errorMessage}
+    {#if !$movies.length && !errorMessage}
       <div>Loading data ...</div>
     {/if}
     <ul class="list">
-      {#each $discounts as { id, store, percentage, code }, _i (id)}
+      {#each $movies as { id, name, year, length }, _i (id)}
         <li role="presentation">
           <div class="card">
             <div class="card-content">
-              <div class="content discount-grid">
-                <span class="label">Store:</span>
-                <span>{store}</span>
-                <span class="label">Discount:</span>
-                <span>{percentage}%</span>
-                <span class="label">Code:</span>
-                <span>{code}</span>
+              <div class="content movie-grid">
+                <span class="label">Name:</span>
+                <span>{name}</span>
+                <span class="label">Year:</span>
+                <span>{year}</span>
+                <span class="label">Length:</span>
+                <span>{length}</span>
               </div>
             </div>
           </div>

@@ -1,2 +1,2 @@
-export * from './discount';
+export * from './movie';
 export * from './product';

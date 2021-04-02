@@ -19,8 +19,8 @@
   logRouteLocation(location);
 
   let selectedProduct: Product = undefined;
-  let routePath = '/products';
-  let title = 'My List';
+  let routePath = '/Eproducts';
+  let title = 'Heroes';
   let productToDelete: Product = null;
   let message = '';
   let showModal = false;
@@ -86,7 +86,8 @@
     {title}
     {routePath}
     on:add={enableAddMode}
-    on:refresh={getProducts} />
+    on:refresh={getProducts}
+  />
   <div class="columns is-multiline is-variable">
     {#if products}
       <div class="column is-8">
@@ -95,12 +96,14 @@
             {errorMessage}
             products={$products}
             on:deleted={askToDelete}
-            on:selected={selectProduct} />
+            on:selected={selectProduct}
+          />
         {:else}
           <ProductDetail
             product={selectedProduct}
             on:unselect={clear}
-            on:save={save} />
+            on:save={save}
+          />
         {/if}
       </div>
     {/if}
@@ -110,5 +113,6 @@
     {message}
     isOpen={showModal}
     on:handleNo={closeModal}
-    on:handleYes={deleteProduct} />
+    on:handleYes={deleteProduct}
+  />
 </div>

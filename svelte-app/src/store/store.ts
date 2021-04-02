@@ -1,17 +1,17 @@
 import { Writable, writable } from 'svelte/store';
-import { Discount, Product } from '../models';
+import { Movie, Product } from '../models';
 
 interface AppState {
-  discounts: Writable<Discount[]>;
+  movies: Writable<Movie[]>;
   products: Writable<Product[]>;
 }
 const state: AppState = {
-  discounts: writable([]),
+  movies: writable([]),
   products: writable([]),
 };
 
-const getDiscounts = (discounts: Discount[]) => {
-  state.discounts.update((old: Discount[]) => discounts);
+const getMovies = (movies: Movie[]) => {
+  state.movies.update((old: Movie[]) => movies);
 };
 const getProducts = (products: Product[]) => {
   state.products.update((old: Product[]) => products);
@@ -44,5 +44,5 @@ export {
   getProducts,
   updateProduct,
   deleteProduct,
-  getDiscounts,
+  getMovies,
 };

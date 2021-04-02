@@ -8,12 +8,12 @@ import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
       [ngClass]="className"
       [attr.aria-label]="label"
       tabindex="0"
-      [attr.data-id]="item.id"
+      [attr.data-id]="item?.id"
       (click)="handleClick()"
     >
       <i [ngClass]="iconClasses"></i> <span>{{ label }}</span>
     </button>
-  `
+  `,
 })
 export class ButtonFooterComponent implements OnInit {
   @Input() label;

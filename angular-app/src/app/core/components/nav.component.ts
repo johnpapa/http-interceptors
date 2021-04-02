@@ -1,5 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { UserInfo } from '../model';
+import { Component, OnDestroy } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { SessionService } from '../session.service';
+
+const captains = console;
 
 @Component({
   selector: 'app-nav',
@@ -11,48 +15,55 @@ import { UserInfo } from '../model';
           <span>Home</span>
         </a>
         <a routerLink="/products" routerLinkActive="router-link-active">
-          <span>My List</span>
+          <span>Heroes</span>
         </a>
-        <a routerLink="/discounts" routerLinkActive="router-link-active">
-          <span>My Discounts</span>
+        <a routerLink="/movies" routerLinkActive="router-link-active">
+          <span>My Movies</span>
         </a>
       </ul>
     </nav>
     <nav class="menu auth">
       <p class="menu-label">Auth</p>
       <div class="menu-list auth">
-        <ng-container *ngIf="!userInfo">
-          <ng-container *ngFor="let provider of providers">
-            <app-auth-login [provider]="provider"></app-auth-login>
-          </ng-container>
-        </ng-container>
-        <app-auth-logout *ngIf="userInfo"></app-auth-logout>
+        <a
+          *ngIf="!loggedIn"
+          routerLink="/signin"
+          routerLinkActive="router-link-active"
+        >
+          <span>Sign in</span>
+        </a>
+        <a *ngIf="loggedIn" (click)="signout()">
+          <span>Sign Out</span>
+        </a>
       </div>
     </nav>
-    <div class="user" *ngIf="userInfo">
-      <p>Welcome</p>
-      <p>{{ userInfo?.userDetails }}</p>
-      <p>{{ userInfo?.identityProvider }}</p>
+    <div class="user">
+      <p>{{ message }}</p>
     </div>
   `,
 })
-export class NavComponent implements OnInit {
-  providers = ['twitter', 'github', 'aad', 'google', 'facebook'];
-  userInfo: UserInfo;
+export class NavComponent implements OnDestroy {
+  private subs = new Subscription();
+  message: string;
+  loggedIn: boolean;
 
-  async ngOnInit() {
-    this.userInfo = await this.getUserInfo();
+  constructor(private router: Router, private sessionService: SessionService) {
+    this.subs.add(
+      this.sessionService.sessionState$.subscribe(async (state) => {
+        this.message = state.message;
+        this.loggedIn = state.loggedIn;
+      }),
+    );
   }
 
-  async getUserInfo() {
-    try {
-      const response = await fetch('/.auth/me');
-      const payload = await response.json();
-      const { clientPrincipal } = payload;
-      return clientPrincipal;
-    } catch (error) {
-      console.error('No profile could be found');
-      return undefined;
-    }
+  ngOnDestroy() {
+    this.subs.unsubscribe();
+  }
+
+  signout() {
+    this.sessionService.logout();
+    captains.info(`Successfully logged out`);
+    const url = ['/home'];
+    this.router.navigate(url);
   }
 }

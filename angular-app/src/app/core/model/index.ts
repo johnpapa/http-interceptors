@@ -1,3 +1,3 @@
-export * from './discount';
+export * from './movie';
 export * from './product';
-export * from './user-info';
+export * from './user';

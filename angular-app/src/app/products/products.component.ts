@@ -8,7 +8,7 @@ import { ProductService } from './product.service';
   template: `
     <div class="content-container">
       <app-list-header
-        title="My List"
+        title="Heroes"
         (add)="enableAddMode()"
         (refresh)="getProducts()"
       ></app-list-header>

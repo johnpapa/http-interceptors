@@ -3,7 +3,7 @@
   import { Router, Route } from 'svelte-routing';
   import Home from './Home.svelte';
   import Products from './products/Products.svelte';
-  import Discounts from './Discounts.svelte';
+  import Movies from './Movies.svelte';
 
   import { HeaderBar, NavBar, PageNotFound, Redirect } from './components';
 
@@ -21,7 +21,7 @@
         </Route>
         <Route path="/home" component={Home} />
         <Route path="/products" component={Products} />
-        <Route path="/discounts" component={Discounts} />
+        <Route path="/movies" component={Movies} />
         <Route path="**" component={PageNotFound} />
       </div>
     </main>

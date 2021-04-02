@@ -8,20 +8,21 @@ import { AppStoreModule } from './store/store.module';
 import { HomeComponent } from './home.component';
 import { RouterModule } from '@angular/router';
 import { externalModules } from './build-specific';
-import { declarations } from './core';
-import { DiscountComponent } from './discounts.component';
+import { declarations, httpInterceptorProviders } from './core';
+import { MovieComponent } from './movies.component';
 import { SharedModule } from './shared/shared.module';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, DiscountComponent, declarations],
+  declarations: [AppComponent, HomeComponent, MovieComponent, declarations],
   imports: [
     BrowserModule,
+    SharedModule,
     HttpClientModule,
     RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy' }),
     AppStoreModule,
-    SharedModule,
     externalModules,
   ],
+  providers: [httpInterceptorProviders],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -1,7 +1,8 @@
 import { Routes } from '@angular/router';
 import { HomeComponent } from './home.component';
-import { DiscountComponent } from './discounts.component';
-import { NotFoundComponent } from './core';
+import { MovieComponent } from './movies.component';
+import { NotFoundComponent, SignInComponent } from './core';
+import { AuthFailedComponent } from './core/components/auth-failed.component';
 
 export const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home' },
@@ -11,6 +12,8 @@ export const routes: Routes = [
     loadChildren: () =>
       import('./products/products.module').then((m) => m.ProductsModule),
   },
-  { path: 'discounts', component: DiscountComponent },
+  { path: 'movies', component: MovieComponent },
+  { path: 'signin', component: SignInComponent },
+  { path: 'authfailed', component: AuthFailedComponent },
   { path: '**', component: NotFoundComponent },
 ];

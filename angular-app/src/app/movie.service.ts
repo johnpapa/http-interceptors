@@ -3,11 +3,11 @@ import {
   EntityCollectionServiceBase,
   EntityCollectionServiceElementsFactory,
 } from '@ngrx/data';
-import { Discount } from './core';
+import { Movie } from './core';
 
 @Injectable({ providedIn: 'root' })
-export class DiscountService extends EntityCollectionServiceBase<Discount> {
+export class MovieService extends EntityCollectionServiceBase<Movie> {
   constructor(serviceElementsFactory: EntityCollectionServiceElementsFactory) {
-    super('Discount', serviceElementsFactory);
+    super('Movie', serviceElementsFactory);
   }
 }
