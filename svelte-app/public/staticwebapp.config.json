@@ -1,0 +1,47 @@
+{
+  "routes": [
+    {
+      "route": "/api/products/*",
+      "methods": ["GET", "PUT", "POST", "DELETE"],
+      "allowedRoles": ["authenticated"]
+    },
+    {
+      "route": "/api/discounts/*",
+      "allowedRoles": ["preferred"]
+    },
+    {
+      "route": "/api/*",
+      "methods": ["GET"],
+      "allowedRoles": ["authenticated"]
+    },
+    {
+      "route": "/.auth/login/facebook",
+      "statusCode": "404"
+    },
+    {
+      "route": "/.auth/login/google",
+      "statusCode": "404"
+    },
+    {
+      "route": "/logout",
+      "redirect": "/.auth/logout"
+    },
+    {
+      "route": "/deals",
+      "redirect": "/this-isnt-helping.html",
+      "statusCode": 301
+    }
+  ],
+  "navigationFallback": {
+    "rewrite": "index.html",
+    "exclude": ["/*.{css,scss,js,png,gif,ico,jpg}"]
+  },
+  "responseOverrides": {
+    "404": {
+      "rewrite": "/404.html"
+    }
+  },
+  "mimeTypes": {
+    ".json": "text/json"
+  }
+}
