@@ -15,7 +15,7 @@ export const httpInterceptorProviders = [
   { provide: HTTP_INTERCEPTORS, useClass: ReadOnlyInterceptor, multi: true },
   // SSL, Auth, CSRF:Now that it has passed the readonly test, we want to stuff headers and proceed.
   { provide: HTTP_INTERCEPTORS, useClass: EnsureSSLInterceptor, multi: true },
-  // { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+  { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
   { provide: HTTP_INTERCEPTORS, useClass: CSRFInterceptor, multi: true },
   // // Log headers: Must come after the headers are stuffed.
   { provide: HTTP_INTERCEPTORS, useClass: LogHeadersInterceptor, multi: true },

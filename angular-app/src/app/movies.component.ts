@@ -54,7 +54,8 @@ export class MovieComponent {
       (_) => {
         /*.. do nothing for success.. */
       },
-      (error: any) => (this.errorMessage = error.error.statusText),
+      (error: any) =>
+        (this.errorMessage = error?.error?.message || 'Error occurred'),
     );
   }
 

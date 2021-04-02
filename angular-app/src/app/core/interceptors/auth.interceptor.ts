@@ -39,21 +39,17 @@ export class AuthInterceptor implements HttpInterceptor {
 
   handleErrors(source: Observable<HttpEvent<any>>): Observable<HttpEvent<any>> {
     return source.pipe(
-      catchError((error: HttpErrorResponse) => {
-        // return error.status === 401 ? this.handle401(error) : throwError(error);
-        return throwError(error);
+      catchError((response: HttpErrorResponse) => {
+        let message =
+          response.status === 401
+            ? `Unauthorized: ${response.message}`
+            : response.message;
+        const newResponse = {
+          ...response,
+          message,
+        };
+        return throwError(newResponse);
       }),
     );
   }
-
-  // handle401(error: HttpErrorResponse) {
-  //   const authResHeader = error.headers.get('WWW-Authenticate');
-  //   if (/is expired/.test(authResHeader)) {
-  //     this.router.navigate(['signin']);
-  //     // this.sessionService.refreshToken();
-  //   } else {
-  //     this.router.navigate(['authfailed']);
-  //   }
-  //   return EMPTY;
-  // }
 }
