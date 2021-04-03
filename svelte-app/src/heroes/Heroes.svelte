@@ -19,7 +19,7 @@
   logRouteLocation(location);
 
   let selectedHero: Hero = undefined;
-  let routePath = '/Eheroes';
+  let routePath = '/heroes';
   let title = 'Heroes';
   let heroToDelete: Hero = null;
   let message = '';

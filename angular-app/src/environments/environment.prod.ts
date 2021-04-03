@@ -1,4 +1,4 @@
 export const environment = {
-  heroion: true,
+  production: true,
   API: 'api',
 };

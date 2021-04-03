@@ -13,19 +13,19 @@ import { Component } from '@angular/core';
 
         <div class="button-group">
           <button class="button" aria-label="My Movies">
-            <a href="/movies">
+            <a routerLink="/movies">
               <i class="fas fa-film"></i>
               My Movies
             </a>
           </button>
           <button class="button" aria-label="Heroes" tabindex="0">
-            <a href="/heroes">
+            <a routerLink="/heroes">
               <i class="fas fa-mask"></i>
               Heroes
             </a>
           </button>
           <button class="button" aria-label="Villains" tabindex="0">
-            <a href="/villains">
+            <a routerLink="/villains">
               <i class="fas fa-user-ninja"></i>
               Villains
             </a>

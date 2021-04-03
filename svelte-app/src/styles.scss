@@ -11,7 +11,8 @@ $primary-light: $svelte-light;
 $link: $primary; // #00b3e6; // #ff4081;
 $info: $primary;
 $shade-light: #fafafa;
-$light-gray: #777;
+$dark-gray: #777;
+$light-gray: #bbb;
 
 @import '~bulma/bulma.sass';
 
@@ -35,7 +36,7 @@ $light-gray: #777;
         }
       }
       a {
-        color: $light-gray;
+        color: $dark-gray;
         &:hover {
           color: $primary;
         }
@@ -85,7 +86,7 @@ $light-gray: #777;
 }
 
 .user {
-  color: $light-gray;
+  color: $primary;
   margin-top: 2em;
   padding-top: 1em;
   padding-left: 0.25em;
@@ -185,7 +186,7 @@ header {
   }
   button.button {
     border: 0;
-    color: $light-gray;
+    color: $dark-gray;
     &:hover {
       color: $link;
     }
@@ -202,7 +203,7 @@ div.card-content {
   }
   .description {
     font-size: 20px;
-    color: $light-gray;
+    color: $dark-gray;
   }
   background-color: $shade-light;
 }
@@ -230,7 +231,7 @@ p.card-header-title {
   i {
     margin-right: 10px;
   }
-  color: $light-gray;
+  color: $dark-gray;
   &:hover {
     color: $link;
   }

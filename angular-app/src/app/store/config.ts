@@ -12,6 +12,11 @@ export const defaultDataServiceConfig: DefaultDataServiceConfig = {
       entityResourceUrl: `${root}/heroes/`,
       collectionResourceUrl: `${root}/heroes/`,
     },
+    Villain: {
+      // You must specify the root as part of the resource URL.
+      entityResourceUrl: `${root}/villains/`,
+      collectionResourceUrl: `${root}/villains/`,
+    },
     Movie: {
       entityResourceUrl: `${root}/movies/`,
       collectionResourceUrl: `${root}/movies/`,

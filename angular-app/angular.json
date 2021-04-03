@@ -36,7 +36,7 @@
             "scripts": []
           },
           "configurations": {
-            "heroion": {
+            "production": {
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -75,8 +75,8 @@
             "browserTarget": "angular-app:build"
           },
           "configurations": {
-            "heroion": {
-              "browserTarget": "angular-app:build:heroion"
+            "production": {
+              "browserTarget": "angular-app:build:production"
             }
           }
         },

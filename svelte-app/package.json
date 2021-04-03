@@ -5,7 +5,9 @@
     "build": "rollup -c",
     "dev": "rollup -c -w",
     "start": "sirv public --cors --single",
-    "validate": "svelte-check"
+    "validate": "svelte-check",
+    "full-stack": "concurrently \"npm run backend\" \"npm run dev\"",
+    "backend": "json-server-auth --watch db.json --routes routes.json --port 5001 --delay 1000 --middlewares ./node_modules/json-server-reset"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^18.0.0",
@@ -20,6 +22,7 @@
     "node-sass": "^5.0.0",
     "postcss": "^8.2.9",
     "prettier": "^2.2.1",
+    "query-string": "^7.0.0",
     "rollup": "^2.44.0",
     "rollup-plugin-livereload": "^2.0.0",
     "rollup-plugin-postcss": "^4.0.0",
@@ -35,6 +38,7 @@
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.35",
     "@fortawesome/free-solid-svg-icons": "^5.15.3",
+    "axios": "^0.21.1",
     "bulma": "^0.9.2",
     "sirv-cli": "^1.0.0"
   }
