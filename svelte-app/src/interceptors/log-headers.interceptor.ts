@@ -1,5 +1,5 @@
 import axios, { AxiosRequestConfig } from 'axios';
-import { logError, prefixReq } from './http-config';
+import { prefixReq } from './http-config';
 
 export function logHeadersInterceptor() {
   axios.interceptors.request.use((config: AxiosRequestConfig) => {

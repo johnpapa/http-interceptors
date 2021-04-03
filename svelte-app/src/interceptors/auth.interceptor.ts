@@ -1,5 +1,5 @@
 import axios, { AxiosRequestConfig } from 'axios';
-import { logError, prefixReq } from './http-config';
+import { prefixReq } from './http-config';
 import * as sessionService from '../store/session.service';
 
 export function authInterceptor() {
