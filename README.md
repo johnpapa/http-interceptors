@@ -13,7 +13,21 @@ by [John Papa](http://twitter.com/john_papa)
    cd tour
    ```
 
+1. Choose your app
+
+   ```bash
+   cd angular-app
+   # or
+   cd svelte-app
+   ```
+
 1. Install the npm packages
+
+   ```bash
+   npm install
+   ```
+
+1. Run the app
 
    ```bash
    npm run full-stack
@@ -23,19 +37,16 @@ by [John Papa](http://twitter.com/john_papa)
 
 Here is a list of the features in this app:
 
-- [x] Start from the official quick-start and CLI
+- [x] Pages for home, list of movies, heroes and villains
 - [x] Client side routing
-  - [x] Three main routes Heroes, Villains, About
   - [x] Handles an erroneous route, leading to a PageNotFound component
   - [x] Active route is highlighted in the nav menu
   - [x] Routing should use html5 mode, not hash routes
-  - [x] Routing guards
-  - [x] Preload strategies
+  - [x] HTTP Interceptors
 - [x] API
   - [x] JSON server as a backend
   - [x] App served on one port which can access API on another port proxy or CORS)
   - [x] HTTP - Uses most common client http libraries for each framework
-  - [x] HTTP interceptors
   - [x] API routes are restricted to those who sign in except `movies`
   - [x] API route `movies` is readonly to all (no sign in required)
 - [x] Auth
@@ -44,7 +55,7 @@ Here is a list of the features in this app:
   - [x] Bulma
   - [x] SASS
   - [x] Font Awesome
-  - [x] Same exact css in every app
+  - [x] Same css in each app
 - [x] Editing - Heroes and Villains will be editable (add, update, delete)
 - [x] State/Store - Uses a store for state management
 - [x] Web development server handles fallback routing
