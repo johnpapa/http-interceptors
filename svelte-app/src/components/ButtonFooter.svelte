@@ -22,7 +22,8 @@
   tabindex="0"
   on:click={handleClick}
   data-index={dataIndex}
-  data-id={dataId}>
+  data-id={dataId}
+>
   <i class={iconClasses} />
   <span>{label}</span>
 </button>

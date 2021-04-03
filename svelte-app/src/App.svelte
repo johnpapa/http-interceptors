@@ -5,7 +5,14 @@
   import Heroes from './heroes/Heroes.svelte';
   import Movies from './Movies.svelte';
 
-  import { HeaderBar, NavBar, PageNotFound, Redirect } from './components';
+  import {
+    AuthFailed,
+    HeaderBar,
+    NavBar,
+    PageNotFound,
+    Redirect,
+    SignIn,
+  } from './components';
 
   export let url: string = '';
 </script>
@@ -20,8 +27,11 @@
           <Redirect path="/home" />
         </Route>
         <Route path="/home" component={Home} />
-        <Route path="/heroes" component={Heroes} />
         <Route path="/movies" component={Movies} />
+        <Route path="/heroes" component={Heroes} />
+        <Route path="/signin" component={SignIn} />
+        <Route path="/authfailed" component={AuthFailed} />
+        <!-- <Route path="/villains" component={Villains} /> -->
         <Route path="**" component={PageNotFound} />
       </div>
     </main>

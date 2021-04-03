@@ -1,15 +1,17 @@
-export const parseList = async <T>(response: Response) => {
+import { AxiosResponse } from 'axios';
+
+export const parseList = <T>(response: AxiosResponse) => {
   if (response.status !== 200) throw Error(`Error, status ${response.status}`);
-  let list: T[] = await response.json();
+  let list: T[] = response.data;
   if (typeof list !== 'object') {
     list = [];
   }
   return list;
 };
 
-export const parseItem = async <T>(response: Response, code: number) => {
+export const parseItem = <T>(response: AxiosResponse, code: number) => {
   if (response.status !== code) throw Error(`Error, status ${response.status}`);
-  let item = await response.json();
+  let item = response.data;
   if (typeof item !== 'object') {
     item = undefined;
   }

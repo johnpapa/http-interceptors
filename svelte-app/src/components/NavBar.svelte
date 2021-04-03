@@ -1,34 +1,20 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import { Link } from 'svelte-routing';
-  import AuthLogin from './AuthLogin.svelte';
-  import AuthLogout from './AuthLogout.svelte';
+  import * as sessionService from '../shared/session.service';
 
   // const { activeRoute } = getContext(ROUTER);
-  let userInfo = undefined;
-  const providers: string[] = [
-    'twitter',
-    'github',
-    'aad',
-    'google',
-    'facebook',
-  ];
+  let message = '';
+  let loggedIn = false;
 
-  onMount(async () => (userInfo = await getUserInfo()));
+  onMount(async () => await getUserInfo());
 
   async function getUserInfo() {
-    try {
-      const response = await fetch('/.auth/me');
-      const payload = await response.json();
-      const { clientPrincipal } = payload;
-      return clientPrincipal;
-    } catch (error) {
-      console.error('NavBar.svelte: No profile could be found');
-      return undefined;
-    }
+    loggedIn = sessionService.isLoggedIn();
+    // this.message = state.message;
+    // this.loggedIn = state.loggedIn;
   }
 
-  // function getProps({ location, href, isPartiallyCurrent, isCurrent }) {
   function getProps({ href, isPartiallyCurrent, isCurrent }) {
     const isActive = href === '/' ? isCurrent : isPartiallyCurrent || isCurrent;
 
@@ -38,6 +24,13 @@
     }
     return {};
   }
+
+  function signout() {
+    // this.sessionService.logout();
+    // captains.info(`Successfully logged out`);
+    // const url = ['/home'];
+    // this.router.navigate(url);
+  }
 </script>
 
 <div class="column is-2">
@@ -45,28 +38,25 @@
     <p class="menu-label">Menu</p>
     <ul class="menu-list">
       <Link to="/home" {getProps}>Home</Link>
-      <Link to="/heroes" {getProps}>Heroes</Link>
       <Link to="/movies" {getProps}>My Movies</Link>
+      <Link to="/heroes" {getProps}>Heroes</Link>
+      <Link to="/villains" {getProps}>Villains</Link>
     </ul>
   </nav>
   <nav class="menu auth">
     <p class="menu-label">Auth</p>
     <div class="menu-list auth">
-      {#if !userInfo}
-        {#each providers as provider (provider)}
-          <AuthLogin {provider} />
-        {/each}
+      {#if !loggedIn}
+        <Link to="/signin" {getProps}><span>Sign in</span></Link>
       {/if}
-      {#if userInfo}
-        <AuthLogout />
+      {#if loggedIn}
+        <div class="auth-link" on:click={signout}>
+          <span>Sign Out</span>
+        </div>
       {/if}
     </div>
   </nav>
-  {#if userInfo}
-    <div class="user">
-      <p>Welcome</p>
-      <p>{userInfo && userInfo.userDetails}</p>
-      <p>{userInfo && userInfo.identityProvider}</p>
-    </div>
-  {/if}
+  <div class="user">
+    <p>{message}</p>
+  </div>
 </div>
