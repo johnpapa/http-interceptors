@@ -1,7 +1,24 @@
-import axios from 'axios';
+import axios, { AxiosRequestConfig } from 'axios';
+import { logError, prefixReq } from './http-config';
 
-export function csrfHeaders() {
-  let token = 'your-csrf-token-goes-here';
+export function csrfInterceptor() {
+  axios.interceptors.request.use(
+    (config: AxiosRequestConfig) => {
+      let token = 'your-csrf-token-goes-here';
+      if (token) {
+        config.headers['x-csrf-token'] = token;
 
-  axios.defaults.headers.common['x-csrf-token'] = token;
+        console.groupCollapsed(`${prefixReq} 🦹‍♀️ CSRF`);
+        console.log(`Adding CSRF header`);
+        console.log(token);
+        console.groupEnd();
+      }
+
+      return config;
+    },
+    (error) => {
+      logError(error);
+      return Promise.reject(error);
+    },
+  );
 }
