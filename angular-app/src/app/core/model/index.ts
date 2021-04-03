@@ -1,3 +1,4 @@
-export * from './discount';
-export * from './product';
-export * from './user-info';
+export * from './movie';
+export * from './hero';
+export * from './villain';
+export * from './user';

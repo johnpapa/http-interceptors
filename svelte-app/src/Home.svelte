@@ -4,30 +4,40 @@
 
 <div class="content-container">
   <div class="content-title-group">
-    <h2 class="title">Shop at Home</h2>
-    <p>
-      Manage your shopping list! Become a preferred customer and gain access to
-      discount codes, too.
-    </p>
-    <p>Log in to start enjoying your benefits.</p>
+    <h2 class="title">Tour of Movies</h2>
+    <p>Manage your movies! Log in to manage the movies' heroes and villains.</p>
     <br />
     <div class="button-group">
-      <button class="button" aria-label="My List" tabindex="0">
-        <Link to="/products"><i class="fas fa-clipboard-list" /> My List</Link>
-      </button>
-      <button class="button" aria-label="My Discounts">
-        <Link to="/discounts">
-          <i class="fas fa-money-bill-alt" />
-          My Discounts
+      <button class="button" aria-label="My Movies">
+        <Link to="/movies">
+          <i class="fas fa-film" />
+          My Movies
         </Link>
       </button>
-      <button class="button" aria-label="My Discounts">
+      <button class="button" aria-label="Heroes" tabindex="0">
+        <Link to="/heroes"><i class="fas fa-mask" /> Heroes</Link>
+      </button>
+      <button class="button" aria-label="Villains" tabindex="0">
+        <Link to="/villains"><i class="fas fa-user-ninja" /> Villains</Link>
+      </button>
+      <button class="button" aria-label="My Movies">
         <a
-          href="https://github.com/johnpapa/shopathome"
+          href="https://github.com/johnpapa/http-interceptors"
           target="_blank"
-          rel="noopener noreferrer">
+          rel="noopener noreferrer"
+        >
           <i class="fab fa-github" />
           Code in GitHub
+        </a>
+      </button>
+      <button class="button" aria-label="Twitter">
+        <a
+          href="https://twitter.com/john_papa"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <i class="fab fa-twitter" />
+          John on Twitter
         </a>
       </button>
     </div>

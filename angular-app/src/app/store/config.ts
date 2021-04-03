@@ -7,14 +7,14 @@ export const defaultDataServiceConfig: DefaultDataServiceConfig = {
   root, // default root path to the server's web api
 
   entityHttpResourceUrls: {
-    Product: {
+    Hero: {
       // You must specify the root as part of the resource URL.
-      entityResourceUrl: `${root}/products/`,
-      collectionResourceUrl: `${root}/products/`,
+      entityResourceUrl: `${root}/heroes/`,
+      collectionResourceUrl: `${root}/heroes/`,
     },
-    Discount: {
-      entityResourceUrl: `${root}/discounts/`,
-      collectionResourceUrl: `${root}/discounts/`,
+    Movie: {
+      entityResourceUrl: `${root}/movies/`,
+      collectionResourceUrl: `${root}/movies/`,
     },
   },
 };

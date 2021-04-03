@@ -7,9 +7,10 @@ import { Component, OnInit, Input } from '@angular/core';
       <div class="content">
         <div class="name">{{ name }}</div>
         <div class="description">{{ description }}</div>
+        <ng-content></ng-content>
       </div>
     </div>
-  `
+  `,
 })
 export class CardContentComponent implements OnInit {
   @Input() name;
