@@ -22,6 +22,7 @@
     "node-sass": "^5.0.0",
     "postcss": "^8.2.9",
     "prettier": "^2.2.1",
+    "query-string": "^7.0.0",
     "rollup": "^2.44.0",
     "rollup-plugin-livereload": "^2.0.0",
     "rollup-plugin-postcss": "^4.0.0",

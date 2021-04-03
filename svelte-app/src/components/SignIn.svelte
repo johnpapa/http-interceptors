@@ -4,6 +4,12 @@
   import ButtonFooter from './ButtonFooter.svelte';
   import * as sessionService from '../store/session.service';
   import { state } from '../store';
+  import queryString from 'query-string';
+
+  export let location;
+
+  let queryParams;
+  $: queryParams = queryString.parse(location.search);
 
   const { session } = state;
 
@@ -24,23 +30,17 @@
     iconClasses: 'fas fa-sign-in-alt',
   };
 
-  function isLoggedIn(): boolean {
-    // return session.loggedIn;
-    return sessionService.isLoggedIn();
-  }
-
   async function signin() {
-    let response = await sessionService.signin(email, password);
-    const redirectTo = '';
-    //     .pipe(
-    //       mergeMap((result) => this.route.queryParams),
-    //       map((qp) => qp['redirectTo']),
-    //     )
-    //     .subscribe((redirectTo) => {
-    if (sessionService.isLoggedIn()) {
-      captains.info(`Successfully logged in`);
-      const url = redirectTo ? redirectTo : '/home';
-      navigate(url);
+    try {
+      let response = await sessionService.signin(email, password);
+      const redirectTo = queryParams.redirectTo;
+      if (sessionService.isLoggedIn()) {
+        captains.info(`Successfully logged in`);
+        const url = redirectTo ? redirectTo : '/home';
+        navigate(url);
+      }
+    } catch (error) {
+      // TODO: catch
     }
   }
 

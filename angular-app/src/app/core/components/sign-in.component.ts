@@ -66,10 +66,6 @@ export class SignInComponent implements OnDestroy {
     private router: Router,
   ) {}
 
-  public get isLoggedIn(): boolean {
-    return this.sessionService.isLoggedIn;
-  }
-
   signin() {
     this.subs.add(
       this.sessionService
