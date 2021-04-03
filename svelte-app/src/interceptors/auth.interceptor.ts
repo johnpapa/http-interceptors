@@ -1,10 +1,24 @@
-import axios from 'axios';
+import axios, { AxiosRequestConfig } from 'axios';
+import { logError, prefixReq } from './http-config';
 import * as sessionService from '../store/session.service';
 
-export function authHeaders() {
-  const authHeader = sessionService.accessToken;
-  const token = `Bearer ${authHeader}`;
+export function authInterceptor() {
+  axios.interceptors.request.use(
+    (config: AxiosRequestConfig) => {
+      const { accessToken } = sessionService;
+      if (accessToken) {
+        config.headers.Authorization = `Bearer ${accessToken}`;
 
-  axios.defaults.headers.common['Authorization'] = token;
-  axios.defaults.headers.common['Content-Type'] = 'application/json';
+        console.groupCollapsed(`${prefixReq} 🔑 Auth`);
+        console.log(`Adding Auth header`);
+        console.groupEnd();
+      }
+
+      return config;
+    },
+    (error) => {
+      logError(error);
+      return Promise.reject(error);
+    },
+  );
 }

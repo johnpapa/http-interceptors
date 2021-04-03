@@ -16,7 +16,7 @@ export interface AxiosResponseExtended extends AxiosResponse {
 }
 
 export function logError(error: AxiosError) {
-  console.groupCollapsed(`${prefixRes} Log Http Response Error`);
+  console.groupCollapsed(`${prefixRes} 🛑 Log Http Response Error`);
   const msg =
     error.config && error.response
       ? `Http Response Error for ${error?.config?.url}\nreturned with status ${error?.response?.status}\n${error}`

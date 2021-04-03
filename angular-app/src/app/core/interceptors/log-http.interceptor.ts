@@ -43,7 +43,7 @@ export class LogHttpInterceptor implements HttpInterceptor {
   }
   private logError(event: HttpEvent<any>, req: HttpRequest<any>, started: number) {
     if (event instanceof HttpErrorResponse) {
-      console.groupCollapsed(`${prefixRes} Log Http Response Error`);
+      console.groupCollapsed(`${prefixRes} 🛑 Log Http Response Error`);
       const elapsed = Date.now() - started;
       console.log(
         `Http Response Error for ${req.urlWithParams}\nreturned with status ${event.status}\nand took ${elapsed} ms`
