@@ -24,7 +24,7 @@ export function isLoggedIn(): boolean {
 let readOnly = false; // TODO: This could be set based upon a role
 
 export async function signin(email: string, password: string) {
-  const message = `Welcome ${email}`;
+  const message = `Signed in as ${email}`;
   const signinUrl = `${API}/signin/`;
   const body: Partial<User> = {
     email, // 'john@contoso.com',

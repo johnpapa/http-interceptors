@@ -45,7 +45,7 @@ export class SessionService {
       }),
       map((res) => {
         if (res?.accessToken) {
-          const message = `Welcome ${email}`;
+          const message = `Signed in as ${email}`;
           this.accessToken = res.accessToken;
           this.sessionStateSubject.next({ loggedIn: true, message });
           this._isLoggedIn = true;
