@@ -14,10 +14,10 @@ export function readOnlyInterceptor() {
         console.error(msg);
         console.groupEnd();
         // TODO
-        throw new Error(msg) as AxiosError;
+        // throw new Error(msg) as AxiosError;
         // return logError(new Error(msg) as AxiosError);
-        // logError({ code: 'yikes' } as AxiosError);
-        // return Promise.reject(error);
+        const err = new Error(msg) as AxiosError;
+        return Promise.reject(err);
       } else {
         console.groupCollapsed(`${prefixReq} 👓 Read-Only`);
         console.log(`Pass`);

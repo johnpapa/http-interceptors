@@ -2,23 +2,17 @@ import axios, { AxiosRequestConfig } from 'axios';
 import { logError, prefixReq } from './http-config';
 
 export function csrfInterceptor() {
-  axios.interceptors.request.use(
-    (config: AxiosRequestConfig) => {
-      let token = 'your-csrf-token-goes-here';
-      if (token) {
-        config.headers['x-csrf-token'] = token;
+  axios.interceptors.request.use((config: AxiosRequestConfig) => {
+    let token = 'your-csrf-token-goes-here';
+    if (token) {
+      config.headers['x-csrf-token'] = token;
 
-        console.groupCollapsed(`${prefixReq} 🦹‍♀️ CSRF`);
-        console.log(`Adding CSRF header`);
-        console.log(token);
-        console.groupEnd();
-      }
+      console.groupCollapsed(`${prefixReq} 🦹‍♀️ CSRF`);
+      console.log(`Adding CSRF header`);
+      console.log(token);
+      console.groupEnd();
+    }
 
-      return config;
-    },
-    (error) => {
-      logError(error);
-      return Promise.reject(error);
-    },
-  );
+    return config;
+  });
 }
