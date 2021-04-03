@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { User } from './model';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, EMPTY } from 'rxjs';
 
 export interface SessionState {
   loggedIn: boolean;
@@ -39,6 +39,10 @@ export class SessionService {
       password, // '1234'
     };
     return this.http.post<{ accessToken: string }>(signinUrl, body).pipe(
+      catchError((_) => {
+        this.logout();
+        return EMPTY;
+      }),
       map((res) => {
         if (res?.accessToken) {
           const message = `Welcome ${email}`;
@@ -60,10 +64,10 @@ export class SessionService {
 
   logout() {
     this.accessToken = null;
+    this._isLoggedIn = false;
     this.sessionStateSubject.next({
       loggedIn: false,
       message: notSignedInMessage,
     });
-    this._isLoggedIn = false;
   }
 }

@@ -14,7 +14,7 @@ import { Hero } from '../core';
       {{ errorMessage }}
     </div>
     <div *ngIf="!heroes?.length && !errorMessage">Loading data ...</div>
-    <ul class="list">
+    <ul class="list" *ngIf="!errorMessage && heroes?.length">
       <li
         role="presentation"
         *ngFor="let hero of heroes; trackBy: trackByHero; let i = index"

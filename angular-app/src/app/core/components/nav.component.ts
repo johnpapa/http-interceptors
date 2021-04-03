@@ -35,9 +35,9 @@ const captains = console;
         >
           <span>Sign in</span>
         </a>
-        <!-- <a *ngIf="loggedIn" (click)="signout()">
+        <a *ngIf="loggedIn" (click)="signout()">
           <span>Sign Out</span>
-        </a> -->
+        </a>
       </div>
     </nav>
     <div class="user">
