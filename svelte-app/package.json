@@ -5,7 +5,9 @@
     "build": "rollup -c",
     "dev": "rollup -c -w",
     "start": "sirv public --cors --single",
-    "validate": "svelte-check"
+    "validate": "svelte-check",
+    "full-stack": "concurrently \"npm run backend\" \"npm run dev\"",
+    "backend": "json-server-auth --watch db.json --routes routes.json --port 5001 --delay 1000 --middlewares ./node_modules/json-server-reset"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^18.0.0",

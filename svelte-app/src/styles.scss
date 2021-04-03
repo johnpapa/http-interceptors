@@ -11,7 +11,8 @@ $primary-light: $svelte-light;
 $link: $primary; // #00b3e6; // #ff4081;
 $info: $primary;
 $shade-light: #fafafa;
-$light-gray: #777;
+$dark-gray: #777;
+$light-gray: #bbb;
 
 @import '~bulma/bulma.sass';
 
@@ -35,7 +36,7 @@ $light-gray: #777;
         }
       }
       a {
-        color: $light-gray;
+        color: $dark-gray;
         &:hover {
           color: $primary;
         }

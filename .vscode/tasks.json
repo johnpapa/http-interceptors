@@ -22,7 +22,7 @@
     {
       "type": "shell",
       "label": "npm prune",
-      "command": "npm prune --heroion",
+      "command": "npm prune --production",
       "problemMatcher": [],
       "options": {
         "cwd": "${workspaceFolder}/api"

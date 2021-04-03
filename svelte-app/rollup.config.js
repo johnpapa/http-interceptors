@@ -8,9 +8,9 @@ import sveltePreprocess from 'svelte-preprocess';
 import typescript from '@rollup/plugin-typescript';
 import replace from '@rollup/plugin-replace';
 
-const heroion = !process.env.ROLLUP_WATCH;
-const api = 'http://localhost:7071/api';
-const API = process.env.API || heroion ? '/api' : api;
+const production = !process.env.ROLLUP_WATCH;
+const api = 'http://localhost:5001/api';
+const API = process.env.API || production ? '/api' : api;
 
 function serve() {
   let server;
@@ -50,17 +50,17 @@ export default {
       // 2 level deep object should be stringify
       process: JSON.stringify({
         env: {
-          DEV: !heroion,
+          DEV: !production,
           SVELTE_APP_API: API,
         },
       }),
       preventAssignment: true,
     }),
     svelte({
-      preprocess: sveltePreprocess({ sourceMap: !heroion }),
+      preprocess: sveltePreprocess({ sourceMap: !production }),
       compilerOptions: {
-        // enable run-time checks when not in heroion
-        dev: !heroion,
+        // enable run-time checks when not in production
+        dev: !production,
       },
     }),
     // we'll extract any component CSS out into
@@ -78,21 +78,21 @@ export default {
     }),
     commonjs(),
     typescript({
-      sourceMap: !heroion,
-      inlineSources: !heroion,
+      sourceMap: !production,
+      inlineSources: !production,
     }),
 
     // In dev mode, call `npm run start` once
     // the bundle has been generated
-    !heroion && serve(),
+    !production && serve(),
 
     // Watch the `public` directory and refresh the
-    // browser on changes when not in heroion
-    !heroion && livereload('public'),
+    // browser on changes when not in production
+    !production && livereload('public'),
 
-    // If we're building for heroion (npm run build
+    // If we're building for production (npm run build
     // instead of npm run dev), minify
-    heroion && terser(),
+    production && terser(),
   ],
   watch: {
     clearScreen: false,
