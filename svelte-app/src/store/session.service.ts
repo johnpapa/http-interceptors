@@ -8,6 +8,11 @@ export interface SessionState {
   message: string;
 }
 
+export const emptySessionPayload: SessionState = {
+  loggedIn: false,
+  message: '',
+};
+
 const notSignedInMessage = `Not signed in`;
 
 let _isLoggedIn = false;
@@ -52,9 +57,6 @@ export async function signin(email: string, password: string) {
 export function logout() {
   accessToken = null;
   _isLoggedIn = false;
-  sessionState = {
-    loggedIn: false,
-    message: notSignedInMessage,
-  };
+  sessionState = emptySessionPayload;
   store.getSession(sessionState);
 }

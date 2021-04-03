@@ -4,6 +4,7 @@
   import Home from './Home.svelte';
   import Heroes from './heroes/Heroes.svelte';
   import Movies from './Movies.svelte';
+  import { state } from './store';
 
   import {
     AuthFailed,
@@ -14,6 +15,8 @@
     SignIn,
   } from './components';
 
+  const { busy } = state;
+
   export let url: string = '';
 </script>
 
@@ -22,7 +25,10 @@
   <Router {url}>
     <NavBar />
     <main class="column">
-      <div>
+      <div hidden={!$busy.isBusy}>
+        <progress class="progress is-medium is-info" max="100"> 45% </progress>
+      </div>
+      <div hidden={$busy.isBusy}>
         <Route path="/">
           <Redirect path="/home" />
         </Route>

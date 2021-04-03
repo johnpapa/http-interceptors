@@ -3,10 +3,15 @@ import * as store from './store';
 import { parseItem, parseList, stuffHeaders } from './http-utils';
 import { API } from '../config';
 import { Hero } from '../models';
+import * as busyService from './busy.service';
+
+const loadingMessage = 'Loading ...';
+const savingMessage = 'Saving ...';
 
 export async function getHeroesAction() {
   try {
     const headers = stuffHeaders();
+    busyService.increment(loadingMessage);
     const response = await axios.get(`${API}/heroes`, { headers });
     const heroes: Hero[] = parseList<Hero>(response);
     store.getHeroes(heroes);
@@ -14,12 +19,15 @@ export async function getHeroesAction() {
   } catch (err) {
     console.log(err);
     throw new Error(err);
+  } finally {
+    busyService.decrement();
   }
 }
 
 export async function deleteHeroAction(hero: Hero) {
   try {
     const headers = stuffHeaders();
+    busyService.increment(savingMessage);
     const response = await axios.delete(`${API}/heroes/${hero.id}`, {
       headers,
     });
@@ -28,12 +36,15 @@ export async function deleteHeroAction(hero: Hero) {
     return null;
   } catch (error) {
     console.error(error);
+  } finally {
+    busyService.decrement();
   }
 }
 export async function updateHeroAction(hero: Hero) {
   try {
     const data = JSON.stringify(hero);
     const headers = stuffHeaders();
+    busyService.increment(savingMessage);
     const response = await axios.put(`${API}/heroes/${hero.id}`, data, {
       headers,
     });
@@ -42,17 +53,22 @@ export async function updateHeroAction(hero: Hero) {
     return updatedHero;
   } catch (error) {
     console.error(error);
+  } finally {
+    busyService.decrement();
   }
 }
 export async function addHeroAction(hero: Hero) {
   try {
     const data = JSON.stringify(hero);
     const headers = stuffHeaders();
+    busyService.increment(savingMessage);
     const response = await axios.post(`${API}/heroes`, data, { headers });
     const addedHero: Hero = parseItem<Hero>(response, 201);
     store.addHero(addedHero);
     return addedHero;
   } catch (error) {
     console.error(error);
+  } finally {
+    busyService.decrement();
   }
 }
