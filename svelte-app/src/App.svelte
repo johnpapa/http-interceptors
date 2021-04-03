@@ -15,7 +15,11 @@
     SignIn,
   } from './components';
 
+  import { applyHttpInterceptors } from './interceptors';
+
   const { busy } = state;
+
+  applyHttpInterceptors();
 
   export let url: string = '';
 </script>
