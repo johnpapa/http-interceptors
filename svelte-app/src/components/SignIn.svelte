@@ -31,16 +31,12 @@
   };
 
   async function signin() {
-    try {
-      let response = await sessionService.signin(email, password);
-      const redirectTo = queryParams.redirectTo;
-      if (sessionService.isLoggedIn()) {
-        captains.info(`Successfully logged in`);
-        const url = redirectTo ? redirectTo : '/home';
-        navigate(url);
-      }
-    } catch (error) {
-      // TODO: catch
+    let response = await sessionService.signin(email, password);
+    const redirectTo = queryParams.redirectTo;
+    if (sessionService.isLoggedIn()) {
+      captains.info(`Successfully logged in`);
+      const url = redirectTo ? redirectTo : '/home';
+      navigate(url);
     }
   }
 
