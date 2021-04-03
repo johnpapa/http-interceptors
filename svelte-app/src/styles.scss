@@ -86,7 +86,8 @@ $light-gray: #bbb;
 }
 
 .user {
-  color: $light-gray;
+  color: $primary-light;
+  font-weight: bold;
   margin-top: 2em;
   padding-top: 1em;
   padding-left: 0.25em;
@@ -186,7 +187,7 @@ header {
   }
   button.button {
     border: 0;
-    color: $light-gray;
+    color: $dark-gray;
     &:hover {
       color: $link;
     }
@@ -203,7 +204,7 @@ div.card-content {
   }
   .description {
     font-size: 20px;
-    color: $light-gray;
+    color: $dark-gray;
   }
   background-color: $shade-light;
 }
@@ -231,7 +232,7 @@ p.card-header-title {
   i {
     margin-right: 10px;
   }
-  color: $light-gray;
+  color: $dark-gray;
   &:hover {
     color: $link;
   }

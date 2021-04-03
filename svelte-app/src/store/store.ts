@@ -5,7 +5,7 @@ import { SessionState } from './session.service';
 
 const emptySessionPayload: SessionState = {
   loggedIn: false,
-  message: '',
+  message: 'Not signed in',
 };
 
 interface AppState {

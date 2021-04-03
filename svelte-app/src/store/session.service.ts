@@ -8,18 +8,13 @@ export interface SessionState {
   message: string;
 }
 
-export const emptySessionPayload: SessionState = {
+const emptySessionPayload: SessionState = {
   loggedIn: false,
-  message: '',
+  message: 'Not signed in',
 };
-
-const notSignedInMessage = `Not signed in`;
 
 let _isLoggedIn = false;
-let sessionState: SessionState = {
-  loggedIn: false,
-  message: notSignedInMessage,
-};
+let sessionState: SessionState = emptySessionPayload;
 export let accessToken: string;
 
 export function isLoggedIn(): boolean {
