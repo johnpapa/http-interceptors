@@ -78,42 +78,66 @@ The app uses a JSON server for a backend by default. This allows you to run the 
 Sequence is super important with interceptors. The flow in sequence for requests, and then in the opposite order for responses.
 
 ```typescript
+/**
+ *  Interceptors:
+ *    Interceptors operate in LIFO, like a stacking doll.
+ *    When a HTTP request is made, each interceptor is executed in the order it appears.
+ *    When the response is received, the interceptors are executed in the reverse order (LIFO).
+ */
 export const httpInterceptorProviders = [
   /**
    *  Log Http:
    *    This logs all HTTP traffic.
-   *    Should be first-ish so it can log the Http call happening in and out (last).
+   *    Do this first so it can log the Http call happening in and out (last).
    */
   { provide: HTTP_INTERCEPTORS, useClass: LogHttpInterceptor, multi: true },
   /**
    * ReadOnly:
-   *    Do this before we add headers, get busy, or make the call.
+   *    This makes sure that HTTP POST, PUT and DELETE are not allowed if the
+   *    user does not have permission. If they do not, then it cancels the request.
+   *    Do this early, before we add headers, get busy, or execute the request.
    */
   { provide: HTTP_INTERCEPTORS, useClass: ReadOnlyInterceptor, multi: true },
   /**
-   * SSL, Auth, CSRF:
-   *    Now that it has passed the readonly test, we want to stuff headers and proceed.
+   SSL:
+   *    Ensure SSL by making calls that use http instead use https.
    */
   { provide: HTTP_INTERCEPTORS, useClass: EnsureSSLInterceptor, multi: true },
+  /**
+   * Auth:
+   *    Add the authentication headers.
+   */
   { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+  /**
+   * CSRF:
+   *    Add the CSRF headers.
+   */
   { provide: HTTP_INTERCEPTORS, useClass: CSRFInterceptor, multi: true },
   /**
    *  Log headers:
-   *    Must come after the headers are stuffed.
+   *    Log all headers.
+   *    Must come after the headers are stuffed and before the request is made.
    */
   { provide: HTTP_INTERCEPTORS, useClass: LogHeadersInterceptor, multi: true },
   /**
    *  Busy:
-   *    Should be first so it can turn on first, and off last.
+   *    Enable and increment the count of HTTP requests, which can be used to show a busy indicator.
+   *    Also decrement the count when responses are received, to eventually turn off the busy indicator.
+   *    This must happen once it is certain a request will be made,
+   *    and right after the response is received.
    */
   { provide: HTTP_INTERCEPTORS, useClass: BusyInterceptor, multi: true },
   /**
    * Transform Response:
-   *    this could happen anywhere in this particular stream,
-   *    as long as it happens after the first Http log.
-   *    Why? Because the interceptors are FIFO
+   *    Transform the response, making it easier to consume.
+   *    This could happen anywhere in this particular stream,
+   *    as it operates on the response.
    */
-  { provide: HTTP_INTERCEPTORS, useClass: TransformResponseInterceptor, multi: true },
+  {
+    provide: HTTP_INTERCEPTORS,
+    useClass: TransformResponseInterceptor,
+    multi: true,
+  },
 ];
 ```
 
