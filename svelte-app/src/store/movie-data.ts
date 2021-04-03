@@ -1,12 +1,13 @@
 import axios from 'axios';
 import * as store from './store';
-import { parseList } from './http-utils';
+import { parseList, stuffHeaders } from './http-utils';
 import { API } from '../config';
 import { Movie } from '../models';
 
 export async function getMoviesAction() {
   try {
-    const response = await axios.get(`${API}/movies`);
+    const headers = stuffHeaders();
+    const response = await axios.get(`${API}/movies`, { headers });
     const movies: Movie[] = parseList(response);
     store.getMovies(movies);
     return movies;

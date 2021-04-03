@@ -1,20 +1,16 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import { navigate } from 'svelte-routing';
-  import { ButtonFooter } from '../components';
-  import * as sessionService from '../shared/session.service';
+  import ButtonFooter from './ButtonFooter.svelte';
+  import * as sessionService from '../store/session.service';
+  import { state } from '../store';
+
+  const { session } = state;
 
   const captains = console;
 
-  // private subs = new Subscription();
   let email = 'john@contoso.com';
   let password = '1234';
-
-  // onMount(async () => await getHeroes());
-
-  // let sessionService; //: SessionService,
-  //   private route: ActivatedRoute,
-  //   private router: Router,
 
   const cancelOptions = {
     className: 'card-footer-item cancel-button',
@@ -29,24 +25,23 @@
   };
 
   function isLoggedIn(): boolean {
-    return true;
-    // return sessionService.isLoggedIn;
+    // return session.loggedIn;
+    return sessionService.isLoggedIn();
   }
 
   async function signin() {
-    let response = await sessionService.signin(this.email, this.password);
+    let response = await sessionService.signin(email, password);
+    const redirectTo = '';
     //     .pipe(
     //       mergeMap((result) => this.route.queryParams),
     //       map((qp) => qp['redirectTo']),
     //     )
     //     .subscribe((redirectTo) => {
-    //       if (this.sessionService.isLoggedIn) {
-    //         captains.info(`Successfully logged in`);
-    //         const url = redirectTo ? [redirectTo] : ['/home'];
-    //         this.router.navigate(url);
-    //       }
-    //     }),
-    // );
+    if (sessionService.isLoggedIn()) {
+      captains.info(`Successfully logged in`);
+      const url = redirectTo ? redirectTo : '/home';
+      navigate(url);
+    }
   }
 
   function cancel() {

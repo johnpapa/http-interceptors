@@ -1,16 +1,21 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import { Link } from 'svelte-routing';
-  import * as sessionService from '../shared/session.service';
+  import { Link, navigate } from 'svelte-routing';
+  import * as sessionService from '../store/session.service';
+  import { state } from '../store';
+
+  const captains = console;
+
+  const { session } = state;
 
   // const { activeRoute } = getContext(ROUTER);
-  let message = '';
-  let loggedIn = false;
+  // let message = '';
+  // let loggedIn = false;
 
   onMount(async () => await getUserInfo());
 
   async function getUserInfo() {
-    loggedIn = sessionService.isLoggedIn();
+    // loggedIn = sessionService.isLoggedIn();
     // this.message = state.message;
     // this.loggedIn = state.loggedIn;
   }
@@ -26,10 +31,9 @@
   }
 
   function signout() {
-    // this.sessionService.logout();
-    // captains.info(`Successfully logged out`);
-    // const url = ['/home'];
-    // this.router.navigate(url);
+    sessionService.logout();
+    captains.info(`Successfully logged out`);
+    navigate('/home');
   }
 </script>
 
@@ -40,16 +44,16 @@
       <Link to="/home" {getProps}>Home</Link>
       <Link to="/movies" {getProps}>My Movies</Link>
       <Link to="/heroes" {getProps}>Heroes</Link>
-      <Link to="/villains" {getProps}>Villains</Link>
+      <!-- <Link to="/villains" {getProps}>Villains</Link> -->
     </ul>
   </nav>
   <nav class="menu auth">
     <p class="menu-label">Auth</p>
     <div class="menu-list auth">
-      {#if !loggedIn}
+      {#if !$session.loggedIn}
         <Link to="/signin" {getProps}><span>Sign in</span></Link>
       {/if}
-      {#if loggedIn}
+      {#if $session.loggedIn}
         <div class="auth-link" on:click={signout}>
           <span>Sign Out</span>
         </div>
@@ -57,6 +61,6 @@
     </div>
   </nav>
   <div class="user">
-    <p>{message}</p>
+    <p>{$session.message}</p>
   </div>
 </div>

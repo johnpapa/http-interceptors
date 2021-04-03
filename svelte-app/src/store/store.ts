@@ -1,13 +1,16 @@
 import { Writable, writable } from 'svelte/store';
 import { Movie, Hero } from '../models';
+import { SessionState } from './session.service';
 
 interface AppState {
   movies: Writable<Movie[]>;
   heroes: Writable<Hero[]>;
+  session: Writable<SessionState>;
 }
 const state: AppState = {
   movies: writable([]),
   heroes: writable([]),
+  session: writable({ loggedIn: false, message: '' }),
 };
 
 const getMovies = (movies: Movie[]) => {
@@ -15,6 +18,9 @@ const getMovies = (movies: Movie[]) => {
 };
 const getHeroes = (heroes: Hero[]) => {
   state.heroes.update((old: Hero[]) => heroes);
+};
+const getSession = (session: SessionState) => {
+  state.session.update((old: SessionState) => session);
 };
 
 const addHero = (hero: Hero) => {
@@ -38,4 +44,12 @@ const updateHero = (hero: Hero) => {
   });
 };
 
-export { state, addHero, getHeroes, updateHero, deleteHero, getMovies };
+export {
+  state,
+  addHero,
+  getHeroes,
+  updateHero,
+  deleteHero,
+  getMovies,
+  getSession,
+};

@@ -11,7 +11,6 @@
   export let iconClasses = '';
 
   function handleClick() {
-    console.log(`button clicked ${JSON.stringify(item)}`);
     dispatch('clicked', item);
   }
 </script>
