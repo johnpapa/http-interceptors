@@ -1,5 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpInterceptor, HttpEvent, HttpHandler, HttpRequest } from '@angular/common/http';
+import {
+  HttpInterceptor,
+  HttpEvent,
+  HttpHandler,
+  HttpRequest,
+} from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { prefixReq, prefixRes } from './http-config';
 import { SessionService } from '../session.service';
@@ -8,7 +13,10 @@ import { SessionService } from '../session.service';
 export class ReadOnlyInterceptor implements HttpInterceptor {
   constructor(private sessionService: SessionService) {}
 
-  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+  intercept(
+    req: HttpRequest<any>,
+    next: HttpHandler,
+  ): Observable<HttpEvent<any>> {
     const readOnly = this.sessionService.readOnly;
     if (!readOnly || this.okIfReadOnly(req)) {
       console.groupCollapsed(`${prefixReq} 👓 Read-Only`);
@@ -28,7 +36,7 @@ export class ReadOnlyInterceptor implements HttpInterceptor {
     /**
      * Put allowList of readonly routes here
      */
-    const allowList = [/api\/heroes/gi];
+    const allowList = [/api\/movies/gi, /api\/signin/gi];
     return allowList.some((item) => item.test(req.url));
   }
 }

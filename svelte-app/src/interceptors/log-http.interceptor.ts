@@ -1,25 +1,18 @@
-import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
-import { prefixReq, prefixRes } from './http-config';
-
-interface AxiosMeta {
-  started?: number;
-}
-
-interface AxiosRequestConfigExtended extends AxiosRequestConfig {
-  meta: AxiosMeta;
-}
-
-interface AxiosResponseExtended extends AxiosResponse {
-  config: AxiosRequestConfigExtended;
-}
+import axios, { AxiosRequestConfig } from 'axios';
+import {
+  AxiosRequestConfigExtended,
+  AxiosResponseExtended,
+  logError,
+  prefixReq,
+  prefixRes,
+} from './http-config';
 
 export function logHttpInterceptor() {
   axios.interceptors.request.use(
     (config: AxiosRequestConfigExtended) => {
       const started = Date.now();
       config.meta = { started };
-      logRequest(config);
-      return config;
+      return logRequest(config);
     },
     (error) => {
       logError(error);
@@ -29,10 +22,9 @@ export function logHttpInterceptor() {
 
   axios.interceptors.response.use(
     (response: AxiosResponseExtended) => {
-      logResponse(response);
-      return response;
+      return logResponse(response);
     },
-    (error: AxiosError) => {
+    (error) => {
       logError(error);
       return Promise.reject(error);
     },
@@ -42,10 +34,11 @@ export function logHttpInterceptor() {
     console.groupCollapsed(`${prefixReq} 📝 Log Http Request`);
     console.log(`${config.method} "${config.url}"`);
     console.groupEnd();
+    return config;
   }
 
   function logResponse(response: AxiosResponseExtended) {
-    console.groupCollapsed(`${prefixRes} Log Http Response`);
+    console.groupCollapsed(`${prefixRes} 📝 Log Http Response`);
     const { config, status } = response;
     const started = config.meta.started;
     const elapsed = Date.now() - started;
@@ -53,13 +46,6 @@ export function logHttpInterceptor() {
       `HTTP: Response for ${config.url}\nreturned with status ${status}\nand took ${elapsed} ms`,
     );
     console.groupEnd();
+    return response;
   }
-}
-
-function logError(error: AxiosError) {
-  console.groupCollapsed(`${prefixRes} Log Http Response Error`);
-  console.log(
-    `Http Response Error for ${error.config.url}\nreturned with status ${error.response?.status}\n`,
-  );
-  console.groupEnd();
 }

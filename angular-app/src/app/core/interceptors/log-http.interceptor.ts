@@ -33,7 +33,7 @@ export class LogHttpInterceptor implements HttpInterceptor {
 
   private logResponse(event: HttpEvent<any>, req: HttpRequest<any>, started: number) {
     if (event instanceof HttpResponse) {
-      console.groupCollapsed(`${prefixRes} Log Http Response`);
+      console.groupCollapsed(`${prefixRes} 📝 Log Http Response`);
       const elapsed = Date.now() - started;
       console.log(
         `HTTP: Response for ${req.urlWithParams}\nreturned with status ${event.status}\nand took ${elapsed} ms`

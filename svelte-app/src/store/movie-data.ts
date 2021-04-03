@@ -11,7 +11,7 @@ export async function getMoviesAction() {
   try {
     const headers = stuffHeaders();
     busyService.increment(loadingMessage);
-    const response = await axios.get(`${API}/movies2`, { headers });
+    const response = await axios.get(`${API}/movies`, { headers });
     const movies: Movie[] = parseList(response);
     store.getMovies(movies);
     return movies;
