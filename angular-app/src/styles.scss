@@ -30,9 +30,9 @@ $light-gray: #bbb;
       width: 170px;
       border: 1px solid #eee;
       &:hover {
-        background-color: $light-gray;
         a {
           color: $primary;
+          text-decoration: none;
         }
       }
       a {
