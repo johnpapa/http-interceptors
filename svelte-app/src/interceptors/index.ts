@@ -6,6 +6,7 @@ import { globalHeaders } from './global.headers';
 import { logHeadersInterceptor } from './log-headers.interceptor';
 import { logHttpInterceptor } from './log-http.interceptor';
 import { readOnlyInterceptor } from './read-only.interceptor';
+import { transformInterceptor } from './transform.interceptor';
 
 export function applyHttpInterceptors() {
   globalHeaders();
@@ -13,7 +14,7 @@ export function applyHttpInterceptors() {
   /**
    * Axios Interceptors are executed in the reverse order they are added (last in first executed).
    */
-  // transformInterceptor();
+  transformInterceptor();
   busyInterceptor();
   logHeadersInterceptor();
   csrfInterceptor();
