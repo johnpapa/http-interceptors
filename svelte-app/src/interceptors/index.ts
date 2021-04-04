@@ -8,20 +8,64 @@ import { logHttpInterceptor } from './log-http.interceptor';
 import { readOnlyInterceptor } from './read-only.interceptor';
 import { transformInterceptor } from './transform.interceptor';
 
+/**
+ *  Interceptors:
+ *    Axios's interceptors flow in the reverse of the order you provide them.
+ *    If you provide interceptors A, then B, then C,
+ *    then requests will flow in C->b->A and responses will flow out A->B->C.
+ *    Therefore, it is important to add them in the reverse of the
+ *    order you want them to execute.
+ */
 export function applyHttpInterceptors() {
   globalHeaders();
 
   /**
-   * The sequence is important.
-   * Axios Interceptors are executed in the reverse order they are added.
-   * Last in, first executed.
+   * Transform Response:
+   *    Transform the response, making it easier to consume.
+   *    This could happen anywhere in this particular stream,
+   *    as it operates on the response.
    */
   transformInterceptor();
+  /**
+   *  Busy:
+   *    Enable and increment the count of HTTP requests, which can be used to show a busy indicator.
+   *    Also decrement the count when responses are received, to eventually turn off the busy indicator.
+   *    This must happen once it is certain a request will be made,
+   *    and right after the response is received.
+   */
   busyInterceptor();
+  /**
+   *  Log headers:
+   *    Log all headers.
+   *    Must come after the headers are stuffed and before the request is made.
+   */
   logHeadersInterceptor();
+  /**
+   * CSRF:
+   *    Add the CSRF headers.
+   */
   csrfInterceptor();
+  /**
+   * Auth:
+   *    Add the authentication headers.
+   */
   authInterceptor();
+  /**
+   SSL:
+   *    Ensure SSL by making calls that use http instead use https.
+   */
   ensureSSLInterceptor();
+  /**
+   * ReadOnly:
+   *    This makes sure that HTTP POST, PUT and DELETE are not allowed if the
+   *    user does not have permission. If they do not, then it cancels the request.
+   *    Do this early, before we add headers, get busy, or execute the request.
+   */
   readOnlyInterceptor();
+  /**
+   *  Log Http:
+   *    This logs all HTTP traffic.
+   *    Do this first so it can log the Http call happening in and out (last).
+   */
   logHttpInterceptor();
 }

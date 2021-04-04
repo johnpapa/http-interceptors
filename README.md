@@ -75,50 +75,50 @@ The app uses a JSON server for a backend by default. This allows you to run the 
 
 ### Interceptors
 
-Sequence is super important with interceptors. The flow in sequence for requests, and then in the opposite order for responses.
+Sequence is super important with interceptors. They flow in sequence for requests, and then in the opposite order for responses.
+
+The flow for Axios Interceptors and for Angulars Http Interceptors is different.
+
+#### Angular Http Interceptor Flow
+
+Angular's interceptors flow in the order you provide them. If you provide interceptors A, then B, then C, then requests will flow in A->B->C and responses will flow out C->B->A.
 
 ```typescript
-/**
- *  Interceptors:
- *    Interceptors operate in LIFO, like a stacking doll.
- *    When a HTTP request is made, each interceptor is executed in the order it appears.
- *    When the response is received, the interceptors are executed in the reverse order (LIFO).
- */
 export const httpInterceptorProviders = [
   /**
    *  Log Http:
    *    This logs all HTTP traffic.
    *    Do this first so it can log the Http call happening in and out (last).
    */
-  { provide: HTTP_INTERCEPTORS, useClass: LogHttpInterceptor, multi: true },
+  addInterceptor(LogHttpInterceptor),
   /**
    * ReadOnly:
    *    This makes sure that HTTP POST, PUT and DELETE are not allowed if the
    *    user does not have permission. If they do not, then it cancels the request.
    *    Do this early, before we add headers, get busy, or execute the request.
    */
-  { provide: HTTP_INTERCEPTORS, useClass: ReadOnlyInterceptor, multi: true },
+  addInterceptor(ReadOnlyInterceptor),
   /**
    SSL:
    *    Ensure SSL by making calls that use http instead use https.
    */
-  { provide: HTTP_INTERCEPTORS, useClass: EnsureSSLInterceptor, multi: true },
+  addInterceptor(EnsureSSLInterceptor),
   /**
    * Auth:
    *    Add the authentication headers.
    */
-  { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+  addInterceptor(AuthInterceptor),
   /**
    * CSRF:
    *    Add the CSRF headers.
    */
-  { provide: HTTP_INTERCEPTORS, useClass: CSRFInterceptor, multi: true },
+  addInterceptor(CSRFInterceptor),
   /**
    *  Log headers:
    *    Log all headers.
    *    Must come after the headers are stuffed and before the request is made.
    */
-  { provide: HTTP_INTERCEPTORS, useClass: LogHeadersInterceptor, multi: true },
+  addInterceptor(LogHeadersInterceptor),
   /**
    *  Busy:
    *    Enable and increment the count of HTTP requests, which can be used to show a busy indicator.
@@ -126,19 +126,85 @@ export const httpInterceptorProviders = [
    *    This must happen once it is certain a request will be made,
    *    and right after the response is received.
    */
-  { provide: HTTP_INTERCEPTORS, useClass: BusyInterceptor, multi: true },
+  addInterceptor(BusyInterceptor),
   /**
    * Transform Response:
    *    Transform the response, making it easier to consume.
    *    This could happen anywhere in this particular stream,
    *    as it operates on the response.
    */
-  {
-    provide: HTTP_INTERCEPTORS,
-    useClass: TransformResponseInterceptor,
-    multi: true,
-  },
+  addInterceptor(TransformInterceptor),
 ];
+
+function addInterceptor<T>(interceptor: T) {
+  return {
+    provide: HTTP_INTERCEPTORS,
+    useClass: interceptor,
+    multi: true,
+  };
+}
+```
+
+#### Axios Interceptor Flow
+
+Axios's interceptors flow in the reverse of the order you provide them. If you provide interceptors A, then B, then C, then requests will flow in C->b->A and responses will flow out A->B->C.
+
+Therefore, it is important to add them in the reverse of the order you want them to execute.
+
+```typescript
+export function applyHttpInterceptors() {
+  globalHeaders();
+
+  /**
+   * Transform Response:
+   *    Transform the response, making it easier to consume.
+   *    This could happen anywhere in this particular stream,
+   *    as it operates on the response.
+   */
+  transformInterceptor();
+  /**
+   *  Busy:
+   *    Enable and increment the count of HTTP requests, which can be used to show a busy indicator.
+   *    Also decrement the count when responses are received, to eventually turn off the busy indicator.
+   *    This must happen once it is certain a request will be made,
+   *    and right after the response is received.
+   */
+  busyInterceptor();
+  /**
+   *  Log headers:
+   *    Log all headers.
+   *    Must come after the headers are stuffed and before the request is made.
+   */
+  logHeadersInterceptor();
+  /**
+   * CSRF:
+   *    Add the CSRF headers.
+   */
+  csrfInterceptor();
+  /**
+   * Auth:
+   *    Add the authentication headers.
+   */
+  authInterceptor();
+  /**
+   SSL:
+   *    Ensure SSL by making calls that use http instead use https.
+   */
+  ensureSSLInterceptor();
+  /**
+   * ReadOnly:
+   *    This makes sure that HTTP POST, PUT and DELETE are not allowed if the
+   *    user does not have permission. If they do not, then it cancels the request.
+   *    Do this early, before we add headers, get busy, or execute the request.
+   */
+  readOnlyInterceptor();
+  /**
+   *  Log Http:
+   *    This logs all HTTP traffic.
+   *    Do this first so it can log the Http call happening in and out (last).
+   */
+  logHttpInterceptor();
+}
 ```
 
 ## Problems or Suggestions

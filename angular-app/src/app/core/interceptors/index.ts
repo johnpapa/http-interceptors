@@ -10,11 +10,9 @@ import { ReadOnlyInterceptor } from './read-only.interceptor';
 
 /**
  *  Interceptors:
- *    The sequence is important.
- *    Interceptors operate in LIFO, like a stacking doll.
- *    Angular applies interceptors in the order that you provide them.
- *    If you provide interceptors A, then B, then C, then
- *    requests will flow in A->B->C and responses will flow out C->B->A.
+ *    Angular's interceptors flow in the order you provide them.
+ *    If you provide interceptors A, then B, then C,
+ *    then requests will flow in A->B->C and responses will flow out C->B->A.
  */
 export const httpInterceptorProviders = [
   /**
@@ -65,11 +63,7 @@ export const httpInterceptorProviders = [
    *    This could happen anywhere in this particular stream,
    *    as it operates on the response.
    */
-  {
-    provide: HTTP_INTERCEPTORS,
-    useClass: TransformInterceptor,
-    multi: true,
-  },
+  addInterceptor(TransformInterceptor),
 ];
 
 function addInterceptor<T>(interceptor: T) {
