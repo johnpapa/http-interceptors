@@ -1,4 +1,5 @@
 import { authInterceptor } from './auth.interceptor';
+import { busyInterceptor } from './busy.interceptor';
 import { csrfInterceptor } from './csrf.interceptor';
 import { ensureSSLInterceptor } from './ensure-ssl.interceptor';
 import { globalHeaders } from './global.headers';
@@ -13,7 +14,7 @@ export function applyHttpInterceptors() {
    * Axios Interceptors are executed in the reverse order they are added (last in first executed).
    */
   // transformInterceptor();
-  // busyInterceptor();
+  busyInterceptor();
   logHeadersInterceptor();
   csrfInterceptor();
   authInterceptor();
