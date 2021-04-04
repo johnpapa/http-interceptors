@@ -15,7 +15,7 @@
 
   const { villains } = state;
 
-  export let location: Object = {};
+  export let location: any;
   logRouteLocation(location);
 
   let selectedVillain: Villain = undefined;

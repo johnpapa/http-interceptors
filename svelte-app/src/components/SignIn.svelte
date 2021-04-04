@@ -1,17 +1,13 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
   import { navigate } from 'svelte-routing';
   import ButtonFooter from './ButtonFooter.svelte';
   import * as sessionService from '../store/session.service';
-  import { state } from '../store';
   import queryString from 'query-string';
 
-  export let location;
+  export let location: any;
 
   let queryParams;
   $: queryParams = queryString.parse(location.search);
-
-  const { session } = state;
 
   const captains = console;
 
@@ -31,7 +27,7 @@
   };
 
   async function signin() {
-    let response = await sessionService.signin(email, password);
+    await sessionService.signin(email, password);
     const redirectTo = queryParams.redirectTo;
     if (sessionService.isLoggedIn()) {
       captains.info(`Successfully logged in`);

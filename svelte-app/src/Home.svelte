@@ -1,5 +1,8 @@
 <script lang="ts">
   import { Link } from 'svelte-routing';
+
+  export let location: any;
+  const noop = location; // TODO: exists only to make location wraning go away
 </script>
 
 <div class="content-container">

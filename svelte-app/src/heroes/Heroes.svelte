@@ -15,7 +15,7 @@
 
   const { heroes } = state;
 
-  export let location: Object = {};
+  export let location: any;
   logRouteLocation(location);
 
   let selectedHero: Hero = undefined;

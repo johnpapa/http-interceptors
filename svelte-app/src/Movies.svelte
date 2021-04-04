@@ -4,7 +4,8 @@
   import { onMount } from 'svelte';
   import { state, getMoviesAction } from './store';
 
-  export const location: Object = {};
+  export let location: any;
+  const noop = location; // TODO: exists only to make location wraning go away
 
   let errorMessage: string = '';
   let { movies } = state;
