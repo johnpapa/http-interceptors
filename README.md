@@ -1,4 +1,4 @@
-# Tour of Heroes - Http Interceptors Demo
+# Tour of Heroes, the Movie Edition - Http Interceptors Demo
 
 The Web apps in this monorepo make HTTP requests and require uniform consistency in how they are executed and handled.
 

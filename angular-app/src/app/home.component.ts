@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
   template: `
     <div class="content-container">
       <div class="content-title-group">
-        <h2 class="title">Tour of Movies</h2>
+        <h2 class="title">Tour of Heroes</h2>
         <p>
           Manage your movies! Log in to manage the movies' heroes and villains.
         </p>
