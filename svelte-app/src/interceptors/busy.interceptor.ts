@@ -30,12 +30,14 @@ export function busyInterceptor() {
 
       return response;
     },
-    (_) => {
+    (error) => {
       busyService.decrement();
 
       console.groupCollapsed(`${prefixRes} Busy Spinner`);
       console.log('Decrementing the busy spinner');
       console.groupEnd();
+
+      return Promise.reject(error);
     },
   );
 }

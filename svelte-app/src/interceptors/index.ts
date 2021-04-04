@@ -12,7 +12,9 @@ export function applyHttpInterceptors() {
   globalHeaders();
 
   /**
-   * Axios Interceptors are executed in the reverse order they are added (last in first executed).
+   * The sequence is important.
+   * Axios Interceptors are executed in the reverse order they are added.
+   * Last in, first executed.
    */
   transformInterceptor();
   busyInterceptor();
