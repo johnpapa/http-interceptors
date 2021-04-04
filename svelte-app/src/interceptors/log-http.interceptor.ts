@@ -38,14 +38,22 @@ export function logHttpInterceptor() {
   }
 
   function logResponse(response: AxiosResponseExtended) {
-    console.groupCollapsed(`${prefixRes} 📝 Log Http Response`);
-    const { config, status } = response;
-    const started = config.meta.started;
-    const elapsed = Date.now() - started;
-    console.log(
-      `HTTP: Response for ${config.url}\nreturned with status ${status}\nand took ${elapsed} ms`,
-    );
-    console.groupEnd();
+    try {
+      console.groupCollapsed(`${prefixRes} 📝 Log Http Response`);
+      if (!response) {
+        console.log(`HTTP: Response returned`);
+      } else {
+        const { config, status } = response;
+        const started = config.meta.started;
+        const elapsed = Date.now() - started;
+        console.log(
+          `HTTP: Response for ${config?.url}\nreturned with status ${status}\nand took ${elapsed} ms`,
+        );
+      }
+    } finally {
+      console.groupEnd();
+    }
+
     return response;
   }
 }
