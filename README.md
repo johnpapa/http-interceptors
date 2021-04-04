@@ -129,12 +129,12 @@ function addInterceptor<T>(interceptor: T) {
 
 ### Axios Interceptor Flow
 
-Axios's interceptors flow in the reverse of the order you provide them. If you provide interceptors A, then B, then C, then requests will flow in C->b->A and responses will flow out A->B->C.
+Axios's interceptors flow in the reverse of the order you provide them. If you provide interceptors A, then B, then C, then requests will flow in C->B->A and responses will flow out A->B->C.
 
 Therefore, it is important to add them in the reverse of the order you want them to execute.
 
 ```typescript
-// Requests will flow in C->b->A and responses will flow out A->B->C
+// Requests will flow in C->B->A and responses will flow out A->B->C
 export function applyHttpInterceptors() {
   globalHeaders();
 
