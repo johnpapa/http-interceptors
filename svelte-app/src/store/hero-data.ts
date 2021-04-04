@@ -30,6 +30,7 @@ export async function deleteHeroAction(hero: Hero) {
     console.error(error);
   }
 }
+
 export async function updateHeroAction(hero: Hero) {
   try {
     const data = JSON.stringify(hero);
@@ -43,6 +44,7 @@ export async function updateHeroAction(hero: Hero) {
     console.error(error);
   }
 }
+
 export async function addHeroAction(hero: Hero) {
   try {
     const data = JSON.stringify(hero);

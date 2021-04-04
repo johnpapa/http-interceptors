@@ -17,9 +17,9 @@
       <button class="button" aria-label="Heroes" tabindex="0">
         <Link to="/heroes"><i class="fas fa-mask" /> Heroes</Link>
       </button>
-      <!-- <button class="button" aria-label="Villains" tabindex="0">
+      <button class="button" aria-label="Villains" tabindex="0">
         <Link to="/villains"><i class="fas fa-user-ninja" /> Villains</Link>
-      </button> -->
+      </button>
       <button class="button" aria-label="My Movies">
         <a
           href="https://github.com/johnpapa/http-interceptors"
