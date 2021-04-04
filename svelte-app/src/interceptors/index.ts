@@ -1,5 +1,6 @@
 import { authInterceptor } from './auth.interceptor';
 import { csrfInterceptor } from './csrf.interceptor';
+import { ensureSSLInterceptor } from './ensure-ssl.interceptor';
 import { globalHeaders } from './global.headers';
 import { logHeadersInterceptor } from './log-headers.interceptor';
 import { logHttpInterceptor } from './log-http.interceptor';
@@ -16,7 +17,7 @@ export function applyHttpInterceptors() {
   logHeadersInterceptor();
   csrfInterceptor();
   authInterceptor();
-  // ensureSSLInterceptor();
+  ensureSSLInterceptor();
   readOnlyInterceptor();
   logHttpInterceptor();
 }
