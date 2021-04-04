@@ -62,7 +62,7 @@
     try {
       await getVillainsAction();
     } catch (error) {
-      errorMessage = 'Unauthorized';
+      errorMessage = error?.message || 'Error occurred';
     }
   }
 

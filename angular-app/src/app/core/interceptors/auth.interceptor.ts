@@ -40,22 +40,6 @@ export class AuthInterceptor implements HttpInterceptor {
     }
 
     // Pass on the cloned request instead of the original request.
-    return next.handle(authReq).pipe(this.handleErrors);
-  }
-
-  handleErrors(source: Observable<HttpEvent<any>>): Observable<HttpEvent<any>> {
-    return source.pipe(
-      catchError((response: HttpErrorResponse) => {
-        let message =
-          response.status === 401
-            ? `Unauthorized: ${response.message}`
-            : response.message;
-        const newResponse = {
-          ...response,
-          message,
-        };
-        return throwError(newResponse);
-      }),
-    );
+    return next.handle(authReq); //.pipe(this.handleErrors);
   }
 }
