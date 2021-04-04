@@ -75,13 +75,13 @@ Here is a list of the features in this app:
 
 The app uses a JSON server for a backend by default. This allows you to run the code without needing any database engines or cloud accounts. It also supports authorized routes, which this app takes advantage of. Enjoy!
 
-### Interceptors
+## Interceptors
 
 Sequence is super important with interceptors. They flow in sequence for requests, and then in the opposite order for responses.
 
 The flow for Axios Interceptors and for Angulars Http Interceptors is different.
 
-#### Angular Http Interceptor Flow
+### Angular Http Interceptor Flow
 
 Angular's interceptors flow in the order you provide them. If you provide interceptors A, then B, then C, then requests will flow in A->B->C and responses will flow out C->B->A.
 
@@ -147,7 +147,7 @@ function addInterceptor<T>(interceptor: T) {
 }
 ```
 
-#### Axios Interceptor Flow
+### Axios Interceptor Flow
 
 Axios's interceptors flow in the reverse of the order you provide them. If you provide interceptors A, then B, then C, then requests will flow in C->b->A and responses will flow out A->B->C.
 
@@ -215,10 +215,11 @@ export function applyHttpInterceptors() {
 
 ## Resources
 
+- [Angular Essentials for VS Code](https://marketplace.visualstudio.com/items?itemName=johnpapa.angular-essentials&WT.mc_id=javascript-0000-jopapa)
+- [Svelte for VS Code](https://marketplace.visualstudio.com/items?itemName=svelte.svelte-vscode&WT.mc_id=javascript-0000-jopapa)
+- [Axios](https://github.com/axios/axios)
+- [Axios Interceptors](https://github.com/axios/axios#interceptors)
+- [Angular's HttpClient](https://angular.io/guide/http)
+- [Angular HttpClient interceptors](https://angular.io/guide/http#intercepting-requests-and-responses)
 - [VS Code](https://code.visualstudio.com/?WT.mc_id=javascript-0000-jopapa)
 - [Azure Free Trial](https://azure.microsoft.com/free/?WT.mc_id=javascript-0000-jopapa)
-- [VS Code Extension for Node on Azure](https://marketplace.visualstudio.com/items?itemName=ms-vscode.vscode-node-azure-pack&WT.mc_id=javascript-0000-jopapa)
-- [VS Code Extension Marketplace](https://marketplace.visualstudio.com/vscode?WT.mc_id=javascript-0000-jopapa)
-- [VS Code - macOS keys](https://code.visualstudio.com/shortcuts/keyboard-shortcuts-macos.pdf?WT.mc_id=javascript-0000-jopapa)
-- [VS Code - Windows keys](https://code.visualstudio.com/shortcuts/keyboard-shortcuts-windows.pdf?WT.mc_id=javascript-0000-jopapa)
-- [Debugging Angular in VS Code](https://code.visualstudio.com/docs/nodejs/angular-tutorial?WT.mc_id=javascript-0000-jopapa)
