@@ -1,6 +1,8 @@
 # Tour of Heroes - Http Interceptors Demo
 
-This project was created to help represent a fundamental app written with Angular and Svelte using http interceptors.
+The Web apps in this monorepo make HTTP requests and require uniform consistency in how they are executed and handled.
+
+This monorepo demonstrates the same app written with Angular and with Svelte. Each app uses HTTP interceptors. The Angular app uses HttpClient and its interceptors while the Svelte app uses Axios and its interceptors.
 
 by [John Papa](http://twitter.com/john_papa)
 
