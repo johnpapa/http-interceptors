@@ -1,7 +1,7 @@
 import { HTTP_INTERCEPTORS, HttpHeaders } from '@angular/common/http';
 import { AuthInterceptor } from './auth.interceptor';
 import { CSRFInterceptor } from './csrf.interceptor';
-import { TransformResponseInterceptor } from './transform-response.interceptor';
+import { TransformInterceptor } from './transform.interceptor';
 import { LogHttpInterceptor } from './log-http.interceptor';
 import { EnsureSSLInterceptor } from './ensure-ssl.interceptor';
 import { LogHeadersInterceptor } from './log-headers.interceptor';
@@ -66,7 +66,7 @@ export const httpInterceptorProviders = [
    */
   {
     provide: HTTP_INTERCEPTORS,
-    useClass: TransformResponseInterceptor,
+    useClass: TransformInterceptor,
     multi: true,
   },
 ];

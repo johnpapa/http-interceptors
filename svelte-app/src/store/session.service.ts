@@ -21,7 +21,7 @@ export function isLoggedIn(): boolean {
   return _isLoggedIn;
 }
 
-let readOnly = false; // TODO: This could be set based upon a role
+export let enforceReadOnly = false; // TODO: This could be set based upon a role
 
 export async function signin(email: string, password: string) {
   const message = `Signed in as ${email}`;

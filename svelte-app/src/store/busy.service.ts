@@ -1,10 +1,5 @@
+import { BusyState, notBusyPayload } from '../models';
 import * as store from './store';
-
-export interface BusyState {
-  isBusy: boolean;
-  message?: string;
-}
-export const notBusyPayload: BusyState = { isBusy: false };
 
 let busyCounter = 0;
 

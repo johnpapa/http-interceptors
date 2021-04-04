@@ -21,18 +21,24 @@ export class AuthInterceptor implements HttpInterceptor {
     req: HttpRequest<any>,
     next: HttpHandler,
   ): Observable<HttpEvent<any>> {
-    const authHeader = this.sessionService.accessToken;
-    const authReq = req.clone({
-      setHeaders: {
-        Authorization: `Bearer ${authHeader}`,
-        'Content-Type': 'application/json',
-      },
-      withCredentials: true,
-    });
+    const { accessToken } = this.sessionService;
+    let authReq;
 
-    console.groupCollapsed(`${prefixReq} 🔑 Auth`);
-    console.log(`Adding Auth header`);
-    console.groupEnd();
+    if (accessToken) {
+      authReq = req.clone({
+        setHeaders: {
+          Authorization: `Bearer ${accessToken}`,
+          'Content-Type': 'application/json',
+        },
+        withCredentials: true,
+      });
+      console.groupCollapsed(`${prefixReq} 🔑 Auth`);
+      console.log(`Adding Auth header`);
+      console.groupEnd();
+    } else {
+      authReq = req.clone();
+    }
+
     // Pass on the cloned request instead of the original request.
     return next.handle(authReq).pipe(this.handleErrors);
   }

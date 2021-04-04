@@ -2,7 +2,11 @@ import { AxiosResponse } from 'axios';
 import * as sessionService from '../store/session.service';
 
 export const parseList = <T>(response: AxiosResponse) => {
-  if (response.status !== 200) throw Error(`Error, status ${response.status}`);
+  if (!response) {
+    return [];
+  }
+  if (response?.status !== 200)
+    throw Error(`Error, status ${response?.status}`);
   let list: T[] = response.data;
   if (typeof list !== 'object') {
     list = [];

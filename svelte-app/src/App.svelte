@@ -1,9 +1,10 @@
 <script lang="ts">
   import './styles.scss';
   import { Router, Route } from 'svelte-routing';
-  import Home from './Home.svelte';
   import Heroes from './heroes/Heroes.svelte';
+  import Home from './Home.svelte';
   import Movies from './Movies.svelte';
+  import Villains from './villains/villains.svelte';
   import { state } from './store';
 
   import {
@@ -15,7 +16,11 @@
     SignIn,
   } from './components';
 
+  import { applyHttpInterceptors } from './interceptors';
+
   const { busy } = state;
+
+  applyHttpInterceptors();
 
   export let url: string = '';
 </script>
@@ -37,7 +42,7 @@
         <Route path="/heroes" component={Heroes} />
         <Route path="/signin" component={SignIn} />
         <Route path="/authfailed" component={AuthFailed} />
-        <!-- <Route path="/villains" component={Villains} /> -->
+        <Route path="/villains" component={Villains} />
         <Route path="**" component={PageNotFound} />
       </div>
     </main>

@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
   import { Link, navigate } from 'svelte-routing';
   import * as sessionService from '../store/session.service';
   import { state } from '../store';
@@ -7,18 +6,6 @@
   const captains = console;
 
   const { session } = state;
-
-  // const { activeRoute } = getContext(ROUTER);
-  // let message = '';
-  // let loggedIn = false;
-
-  onMount(async () => await getUserInfo());
-
-  async function getUserInfo() {
-    // loggedIn = sessionService.isLoggedIn();
-    // this.message = state.message;
-    // this.loggedIn = state.loggedIn;
-  }
 
   function getProps({ href, isPartiallyCurrent, isCurrent }) {
     const isActive = href === '/' ? isCurrent : isPartiallyCurrent || isCurrent;
@@ -44,7 +31,7 @@
       <Link to="/home" {getProps}>Home</Link>
       <Link to="/movies" {getProps}>My Movies</Link>
       <Link to="/heroes" {getProps}>Heroes</Link>
-      <!-- <Link to="/villains" {getProps}>Villains</Link> -->
+      <Link to="/villains" {getProps}>Villains</Link>
     </ul>
   </nav>
   <nav class="menu auth">

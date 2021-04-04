@@ -1,6 +1,5 @@
 import { Writable, writable } from 'svelte/store';
-import { Movie, Hero } from '../models';
-import { BusyState, notBusyPayload } from './busy.service';
+import { Movie, Hero, BusyState, notBusyPayload, Villain } from '../models';
 import { SessionState } from './session.service';
 
 const emptySessionPayload: SessionState = {
@@ -9,17 +8,19 @@ const emptySessionPayload: SessionState = {
 };
 
 interface AppState {
-  movies: Writable<Movie[]>;
-  heroes: Writable<Hero[]>;
-  session: Writable<SessionState>;
   busy: Writable<BusyState>;
+  heroes: Writable<Hero[]>;
+  movies: Writable<Movie[]>;
+  session: Writable<SessionState>;
+  villains: Writable<Villain[]>;
 }
 
 const state: AppState = {
-  movies: writable([]),
-  heroes: writable([]),
-  session: writable(emptySessionPayload),
   busy: writable(notBusyPayload),
+  heroes: writable([]),
+  movies: writable([]),
+  session: writable(emptySessionPayload),
+  villains: writable([]),
 };
 
 const getMovies = (movies: Movie[]) => {
@@ -28,6 +29,10 @@ const getMovies = (movies: Movie[]) => {
 
 const getHeroes = (heroes: Hero[]) => {
   state.heroes.update((old: Hero[]) => heroes);
+};
+
+const getVillains = (villains: Villain[]) => {
+  state.villains.update((old: Villain[]) => villains);
 };
 
 const getSession = (session: SessionState) => {
@@ -47,14 +52,35 @@ const addHero = (hero: Hero) => {
 
 const deleteHero = (hero: Hero) => {
   state.heroes.update((old: Hero[]) => [
-    ...old.filter((p) => p.id !== hero.id),
+    ...old.filter((h) => h.id !== hero.id),
   ]);
 };
 
 const updateHero = (hero: Hero) => {
   state.heroes.update((old: Hero[]) => {
-    const index = old.findIndex((p) => p.id === hero.id);
+    const index = old.findIndex((h) => h.id === hero.id);
     old.splice(index, 1, hero);
+    return [...old];
+  });
+};
+
+const addVillain = (villain: Villain) => {
+  state.villains.update((old: Villain[]) => {
+    old.unshift(villain);
+    return old;
+  });
+};
+
+const deleteVillain = (villain: Villain) => {
+  state.villains.update((old: Villain[]) => [
+    ...old.filter((v) => v.id !== villain.id),
+  ]);
+};
+
+const updateVillain = (villain: Villain) => {
+  state.villains.update((old: Villain[]) => {
+    const index = old.findIndex((v) => v.id === villain.id);
+    old.splice(index, 1, villain);
     return [...old];
   });
 };
@@ -62,10 +88,14 @@ const updateHero = (hero: Hero) => {
 export {
   state,
   addHero,
-  getHeroes,
-  updateHero,
+  addVillain,
   deleteHero,
+  deleteVillain,
+  getBusy,
+  getHeroes,
   getMovies,
   getSession,
-  getBusy,
+  getVillains,
+  updateHero,
+  updateVillain,
 };

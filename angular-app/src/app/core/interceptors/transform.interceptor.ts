@@ -11,7 +11,7 @@ import { Injectable } from '@angular/core';
 import { prefixRes } from './http-config';
 
 @Injectable()
-export class TransformResponseInterceptor implements HttpInterceptor {
+export class TransformInterceptor implements HttpInterceptor {
   intercept(
     req: HttpRequest<any>,
     next: HttpHandler,
