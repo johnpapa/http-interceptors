@@ -65,6 +65,7 @@ The flow for Axios Interceptors and for Angulars Http Interceptors is different.
 Angular's interceptors flow in the order you provide them. If you provide interceptors A, then B, then C, then requests will flow in A->B->C and responses will flow out C->B->A.
 
 ```typescript
+// Requests will flow in A->B->C and responses will flow out C->B->A.
 export const httpInterceptorProviders = [
   /**
    *  Log Http:
@@ -133,6 +134,7 @@ Axios's interceptors flow in the reverse of the order you provide them. If you p
 Therefore, it is important to add them in the reverse of the order you want them to execute.
 
 ```typescript
+// Requests will flow in C->b->A and responses will flow out A->B->C
 export function applyHttpInterceptors() {
   globalHeaders();
 
