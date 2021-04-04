@@ -40,40 +40,19 @@ by [John Papa](http://twitter.com/john_papa)
 Here is a list of the features in this app:
 
 - [x] Pages for home, list of movies, heroes and villains
-- [x] Client side routing
-  - [x] Handles an erroneous route, leading to a PageNotFound component
-  - [x] Active route is highlighted in the nav menu
-  - [x] Routing should use html5 mode, not hash routes
-  - [x] HTTP Interceptors
+- [x] HTTP Interceptors
 - [x] API
-  - [x] JSON server as a backend
+  - [x] json-server is a backend. No database needed.
+  - [x] json-server-auth provides signin/out authentication and authorization routes.
   - [x] App served on one port which can access API on another port proxy or CORS)
   - [x] HTTP - Uses most common client http libraries for each framework
   - [x] API routes are restricted to those who sign in except `movies`
   - [x] API route `movies` is readonly to all (no sign in required)
-- [x] Auth
-  - [x] Sign in and sign out with json-server-auth
-- [x] Styling
-  - [x] Bulma
-  - [x] SASS
-  - [x] Font Awesome
-  - [x] Same css in each app
-- [x] Editing - Heroes and Villains will be editable (add, update, delete)
+- [x] Viewing/Editing Pages
+  - [x] Home and Movies pages are read-only, and require no authentication
+  - [x] Heroes and Villains pages support editing, and require authenticatation
 - [x] State/Store - Uses a store for state management
-- [x] Web development server handles fallback routing
-- [x] Generic components
-  - [x] Modal
-  - [x] Button Tool
-  - [x] Card
-  - [x] Header bar
-  - [x] List header
-  - [x] Nav bar
-- [x] Props in and emit events out
-- [x] Environment variable for the API location
-
-### Why JSON Server?
-
-The app uses a JSON server for a backend by default. This allows you to run the code without needing any database engines or cloud accounts. It also supports authorized routes, which this app takes advantage of. Enjoy!
+- [x] Styling with Bulma, same css in each app, and Font Awesome
 
 ## Interceptors
 
