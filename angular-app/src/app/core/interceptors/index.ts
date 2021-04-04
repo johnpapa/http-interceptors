@@ -1,4 +1,4 @@
-import { HTTP_INTERCEPTORS, HttpHeaders } from '@angular/common/http';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './auth.interceptor';
 import { CSRFInterceptor } from './csrf.interceptor';
 import { TransformInterceptor } from './transform.interceptor';
@@ -10,6 +10,7 @@ import { ReadOnlyInterceptor } from './read-only.interceptor';
 
 /**
  *  Interceptors:
+ *    The sequence is important.
  *    Interceptors operate in LIFO, like a stacking doll.
  *    Angular applies interceptors in the order that you provide them.
  *    If you provide interceptors A, then B, then C, then
@@ -21,35 +22,35 @@ export const httpInterceptorProviders = [
    *    This logs all HTTP traffic.
    *    Do this first so it can log the Http call happening in and out (last).
    */
-  { provide: HTTP_INTERCEPTORS, useClass: LogHttpInterceptor, multi: true },
+  addInterceptor(LogHttpInterceptor),
   /**
    * ReadOnly:
    *    This makes sure that HTTP POST, PUT and DELETE are not allowed if the
    *    user does not have permission. If they do not, then it cancels the request.
    *    Do this early, before we add headers, get busy, or execute the request.
    */
-  { provide: HTTP_INTERCEPTORS, useClass: ReadOnlyInterceptor, multi: true },
+  addInterceptor(ReadOnlyInterceptor),
   /**
    SSL:
    *    Ensure SSL by making calls that use http instead use https.
    */
-  { provide: HTTP_INTERCEPTORS, useClass: EnsureSSLInterceptor, multi: true },
+  addInterceptor(EnsureSSLInterceptor),
   /**
    * Auth:
    *    Add the authentication headers.
    */
-  { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+  addInterceptor(AuthInterceptor),
   /**
    * CSRF:
    *    Add the CSRF headers.
    */
-  { provide: HTTP_INTERCEPTORS, useClass: CSRFInterceptor, multi: true },
+  addInterceptor(CSRFInterceptor),
   /**
    *  Log headers:
    *    Log all headers.
    *    Must come after the headers are stuffed and before the request is made.
    */
-  { provide: HTTP_INTERCEPTORS, useClass: LogHeadersInterceptor, multi: true },
+  addInterceptor(LogHeadersInterceptor),
   /**
    *  Busy:
    *    Enable and increment the count of HTTP requests, which can be used to show a busy indicator.
@@ -57,7 +58,7 @@ export const httpInterceptorProviders = [
    *    This must happen once it is certain a request will be made,
    *    and right after the response is received.
    */
-  { provide: HTTP_INTERCEPTORS, useClass: BusyInterceptor, multi: true },
+  addInterceptor(BusyInterceptor),
   /**
    * Transform Response:
    *    Transform the response, making it easier to consume.
@@ -70,6 +71,14 @@ export const httpInterceptorProviders = [
     multi: true,
   },
 ];
+
+function addInterceptor<T>(interceptor: T) {
+  return {
+    provide: HTTP_INTERCEPTORS,
+    useClass: interceptor,
+    multi: true,
+  };
+}
 
 /**
  * https://angular.io/guide/http#http-interceptors
