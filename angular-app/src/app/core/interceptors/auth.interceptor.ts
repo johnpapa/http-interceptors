@@ -16,6 +16,7 @@ import { Router } from '@angular/router';
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
   constructor(private router: Router, private sessionService: SessionService) {}
+  foo: 1;
 
   intercept(
     req: HttpRequest<any>,
@@ -40,6 +41,29 @@ export class AuthInterceptor implements HttpInterceptor {
     }
 
     // Pass on the cloned request instead of the original request.
-    return next.handle(authReq); //.pipe(this.handleErrors);
+    return next.handle(authReq).pipe((source) => this.handleAuthErrors(source));
+  }
+
+  handleAuthErrors(
+    source: Observable<HttpEvent<any>>,
+  ): Observable<HttpEvent<any>> {
+    return source.pipe(
+      catchError((error: HttpErrorResponse) => {
+        const authResHeader = error.headers.get('WWW-Authenticate');
+        if (error.status === 401) {
+          const f = this.foo;
+          if (/is expired/.test(authResHeader)) {
+            // TODO: Another option is to refresh token
+            // this.sessionService.refreshToken();
+            this.router.navigate(['signin']);
+          } else {
+            this.router.navigate(['authfailed']);
+          }
+          return EMPTY;
+        } else {
+          return throwError(error);
+        }
+      }),
+    );
   }
 }
