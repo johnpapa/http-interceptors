@@ -50,6 +50,16 @@ $light-gray: #bbb;
   }
 }
 
+a.button.button-primary {
+  color: $dark-gray;
+  background-color: $shade-light;
+  text-decoration: none;
+  &:hover {
+    background-color: $primary-light;
+    color: #fff;
+  }
+}
+
 .column.is-2 {
   min-width: 130px;
   margin-right: 1em;
@@ -66,6 +76,9 @@ $light-gray: #bbb;
     .router-link-active {
       color: #fff;
       background-color: $link;
+    }
+    > a {
+      text-decoration: none;
     }
     > a:hover {
       background-color: $primary-light;

@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
         <h2 class="title">Auth Failed</h2>
         <div>
           <p>Authorization Failed</p>
-          <a routerLink="/signin">
+          <a routerLink="/signin" class="button button-primary">
             <span>Try to log in</span>
           </a>
         </div>

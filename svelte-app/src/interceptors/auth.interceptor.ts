@@ -1,4 +1,5 @@
-import axios, { AxiosRequestConfig } from 'axios';
+import { navigate } from 'svelte-routing';
+import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
 import { prefixReq } from './http-config';
 import * as sessionService from '../store/session.service';
 
@@ -16,4 +17,21 @@ export function authInterceptor() {
 
     return config;
   });
+
+  axios.interceptors.response.use(
+    (response: AxiosResponse) => response,
+    (error: AxiosError) => {
+      if (error.response.status === 401) {
+        const authHeader = error.config.headers['WWW-Authenticate'];
+        if (/is expired/.test(authHeader)) {
+          navigate('/signin');
+        } else {
+          navigate('/authfailed');
+        }
+        console.warn('should not reach here?');
+        return Promise.resolve(true);
+      }
+      return Promise.reject(error);
+    },
+  );
 }

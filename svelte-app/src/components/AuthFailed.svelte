@@ -17,7 +17,9 @@
     <h2 class="title">Auth Failed</h2>
     <div>
       <p>Authorization Failed</p>
-      <Link to="/signin" {getProps}><span>Try to log in</span></Link>
+      <Link to="/signin" {getProps} class="button button-primary"
+        ><span>Try to log in</span></Link
+      >
     </div>
   </div>
 </div>
