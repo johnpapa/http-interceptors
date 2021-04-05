@@ -1,5 +1,4 @@
 import { AxiosResponse } from 'axios';
-import * as sessionService from '../store/session.service';
 
 export const parseList = <T>(response: AxiosResponse) => {
   if (!response) {
@@ -22,12 +21,3 @@ export const parseItem = <T>(response: AxiosResponse, code: number) => {
   }
   return item as T;
 };
-
-export function stuffHeaders() {
-  const authHeader = sessionService.accessToken;
-  const headers = {
-    Authorization: `Bearer ${authHeader}`,
-    'Content-Type': 'application/json',
-  };
-  return headers;
-}

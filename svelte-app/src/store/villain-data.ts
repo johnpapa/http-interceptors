@@ -1,14 +1,13 @@
 import axios from 'axios';
 import * as store from './store';
-import { parseItem, parseList, stuffHeaders } from './http-utils';
+import { parseItem, parseList } from './http-utils';
 import { API } from '../config';
 import { Villain } from '../models';
 
 export async function getVillainsAction() {
   try {
-    const headers = stuffHeaders();
     const url = `${API}/villains`;
-    const response = await axios.get(url, { headers });
+    const response = await axios.get(url);
     const villains: Villain[] = parseList<Villain>(response);
     store.getVillains(villains);
     return villains;
@@ -20,9 +19,8 @@ export async function getVillainsAction() {
 
 export async function deleteVillainAction(villain: Villain) {
   try {
-    const headers = stuffHeaders();
     const url = `${API}/villains/${villain.id}`;
-    const response = await axios.delete(url, { headers });
+    const response = await axios.delete(url);
     parseItem<Villain>(response, 200);
     store.deleteVillain(villain);
     return null;
@@ -34,9 +32,8 @@ export async function deleteVillainAction(villain: Villain) {
 export async function updateVillainAction(villain: Villain) {
   try {
     const data = JSON.stringify(villain);
-    const headers = stuffHeaders();
     const url = `${API}/villains/${villain.id}`;
-    const response = await axios.put(url, data, { headers });
+    const response = await axios.put(url, data);
     const updatedVillain: Villain = parseItem<Villain>(response, 200);
     store.updateVillain(updatedVillain);
     return updatedVillain;
@@ -48,9 +45,8 @@ export async function updateVillainAction(villain: Villain) {
 export async function addVillainAction(villain: Villain) {
   try {
     const data = JSON.stringify(villain);
-    const headers = stuffHeaders();
     const url = `${API}/villains`;
-    const response = await axios.post(url, data, { headers });
+    const response = await axios.post(url, data);
     const addedVillain: Villain = parseItem<Villain>(response, 201);
     store.addVillain(addedVillain);
     return addedVillain;

@@ -7,6 +7,7 @@ export function authInterceptor() {
     const { accessToken } = sessionService;
     if (accessToken) {
       config.headers.Authorization = `Bearer ${accessToken}`;
+      config.withCredentials = true;
 
       console.groupCollapsed(`${prefixReq} 🔑 Auth`);
       console.log(`Adding Auth header`);

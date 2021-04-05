@@ -49,7 +49,7 @@ export function applyHttpInterceptors() {
      * Auth:
      *    Add the authentication headers.
      */
-    authInterceptor,
+    // authInterceptor,
     /**
      * CSRF:
      *    Add the CSRF headers.
