@@ -24,7 +24,7 @@ export function busyInterceptor() {
     (response: AxiosResponse) => {
       busyService.decrement();
 
-      console.groupCollapsed(`${prefixRes} Busy Spinner`);
+      console.groupCollapsed(`${prefixRes} ⚙️ Busy Spinner`);
       console.log('Decrementing the busy spinner');
       console.groupEnd();
 
@@ -33,7 +33,7 @@ export function busyInterceptor() {
     (error) => {
       busyService.decrement();
 
-      console.groupCollapsed(`${prefixRes} Busy Spinner`);
+      console.groupCollapsed(`${prefixRes} ⚙️ Busy Spinner`);
       console.log('Decrementing the busy spinner');
       console.groupEnd();
 
