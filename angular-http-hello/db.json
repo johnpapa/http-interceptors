@@ -1,0 +1,23 @@
+{
+  "users": [
+    {
+      "email": "john@contoso.com",
+      "password": "$2a$10$Hdks3dRdkXoAVkt0It9ciu9GWoqH11IbBdVS.b8MfXvmINN7NZJeC",
+      "id": 1
+    }
+  ],
+  "movies": [
+    {
+      "id": 1,
+      "name": "Mary Poppins",
+      "year": "1964",
+      "length": "2h 19min"
+    },
+    {
+      "id": 2,
+      "name": "Mary Poppins Returns",
+      "year": "2018",
+      "length": "2h 10min"
+    }
+  ]
+}
