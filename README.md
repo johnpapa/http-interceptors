@@ -35,9 +35,19 @@ by [John Papa](http://twitter.com/john_papa)
    npm run full-stack
    ```
 
+## Apps in this Repository
+
+There are several apps in this repository.
+
+| Folder                | Description                                                                                                                                     |
+| --------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+| angular-http-hard-way | Angular app using HttpClient directly. Adds headers, invokes a busy/progress indicator, and handles authentication errors without interceptors. |
+| angular-app           | Angular app using Http Interceptors.                                                                                                            |
+| svelte-app            | Svelte app using Axios Interceptors.                                                                                                            |
+
 ## What's in the App
 
-Here is a list of the features in this app:
+Here is a list of the features in each app (other than the angular-http-hard-way app)
 
 - [x] Pages for home, list of movies, heroes and villains
 - [x] HTTP Interceptors
