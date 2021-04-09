@@ -5,6 +5,7 @@ import { API } from '../config';
 import { Hero } from '../models';
 
 // import * as sessionService from '../store/session.service';
+//
 // export function stuffHeaders() {
 //   const authHeader = sessionService.accessToken;
 //   const headers = {
