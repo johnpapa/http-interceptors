@@ -8,7 +8,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "full-stack": "concurrently \"npm run backend\" \"npm run start\"",
-    "backend": "json-server-auth --watch db.json --routes routes.json --port 4201 --delay 1000 --middlewares ./node_modules/json-server-reset"
+    "backend": "json-server-auth --watch db.json --routes routes.json --port 4201 --delay 1000"
   },
   "private": true,
   "dependencies": {
