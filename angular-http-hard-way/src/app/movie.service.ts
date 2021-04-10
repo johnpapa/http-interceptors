@@ -30,7 +30,7 @@ export class MovieService {
     this.showBusy(false);
 
     return this.http.post<Movie>(`${API}/movies`, movie).pipe(
-      this.catchHttpErrors(),
+      this.handleAuthAndOtherErrors(),
       finalize(() => this.hideBusy()),
     );
   }
@@ -39,17 +39,17 @@ export class MovieService {
     this.showBusy(false);
 
     return this.http.delete(`${API}/movies/${movie.id}`).pipe(
-      this.catchHttpErrors(),
+      this.handleAuthAndOtherErrors(),
       finalize(() => this.hideBusy()),
     );
   }
 
   getMovies(): Observable<Movie[]> {
     this.showBusy(true);
-    const options = this.addAuth();
+    const options = this.addAuthHeader();
 
     return this.http.get<Movie[]>(`${API}/movies`, options).pipe(
-      this.catchHttpErrors(),
+      this.handleAuthAndOtherErrors(),
       finalize(() => this.hideBusy()),
     );
   }
@@ -58,7 +58,7 @@ export class MovieService {
     this.showBusy(true);
     return this.http.get<Movie[]>(`${API}/movies}`).pipe(
       map((movies) => movies.find((movie) => movie.id === id)),
-      this.catchHttpErrors(),
+      this.handleAuthAndOtherErrors(),
       finalize(() => this.hideBusy()),
     );
   }
@@ -67,25 +67,18 @@ export class MovieService {
     this.showBusy(false);
 
     return this.http.put<Movie>(`${API}/movies/${movie.id}`, movie).pipe(
-      this.catchHttpErrors(),
+      this.handleAuthAndOtherErrors(),
       finalize(() => this.hideBusy()),
     );
   }
 
-  private catchHttpErrors = () => (source$: Observable<any>) =>
+  private handleAuthAndOtherErrors = () => (source$: Observable<any>) =>
     source$.pipe(
       catchError((error: HttpErrorResponse) => {
         console.error(error.message);
 
-        const authResHeader = error.headers.get('WWW-Authenticate');
         if (error.status === 401) {
-          if (/is expired/.test(authResHeader)) {
-            // TODO: Another option is to refresh token
-            // this.sessionService.refreshToken();
-            this.router.navigate(['signin']);
-          } else {
-            this.router.navigate(['authfailed']);
-          }
+          this.handleAuthError(error);
           return EMPTY;
         } else {
           return throwError(error);
@@ -109,7 +102,18 @@ export class MovieService {
     console.groupEnd();
   };
 
-  private addAuth(options: any = { headers: new HttpHeaders() }) {
+  private handleAuthError(error: HttpErrorResponse) {
+    const authResHeader = error.headers.get('WWW-Authenticate');
+    if (/is expired/.test(authResHeader)) {
+      // Another option is to refresh token
+      // this.sessionService.refreshToken();
+      this.router.navigate(['signin']);
+    } else {
+      this.router.navigate(['authfailed']);
+    }
+  }
+
+  private addAuthHeader(options: any = { headers: new HttpHeaders() }) {
     const { accessToken } = this.sessionService;
 
     options.headers = options.headers.append(
