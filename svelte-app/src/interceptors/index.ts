@@ -18,10 +18,10 @@ import { transformInterceptor } from './transform.interceptor';
  *    ... but ...
  *    This might make the code confusing to read, since we
  *    think of the order that we add them as being how they are applied.
- *    So we
- *      1. add the functions that apply the interceptors to an array in the order we want them to be applied
- *      2. reverse the array, to get them how Axios interceptors wants them
- *      3. execute the functions that apply the interceptors
+ *    So why not list them in the order we want? We can do this by:
+ *      1. adding the functions that apply the interceptors to an array in the order we want them to be applied
+ *      2. reversing the array, to get them how Axios interceptors wants them
+ *      3. executing the functions that apply the interceptors
  */
 export function applyHttpInterceptors() {
   globalHeaders();
