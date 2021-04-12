@@ -7,6 +7,7 @@ import {
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { prefixReq } from './http-config';
+import { log } from './log';
 
 @Injectable()
 export class EnsureSSLInterceptor implements HttpInterceptor {
@@ -25,10 +26,10 @@ export class EnsureSSLInterceptor implements HttpInterceptor {
     });
     const after = req.url;
     // send the cloned, "secure" request to the next handler.
-    console.groupCollapsed(`${prefixReq} 🔐 SSL`);
-    console.log(`Rerouting all traffic to SSL`);
-    console.log(`URL transformed from ${before} to ${after}`);
-    console.groupEnd();
+    log(`${prefixReq} 🔐 SSL`, [
+      'Rerouting all traffic to SSL',
+      `URL transformed from ${before} to ${after}`,
+    ]);
     return next.handle(secureReq);
   }
 }
