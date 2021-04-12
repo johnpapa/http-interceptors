@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { tap } from 'rxjs/operators';
 import { prefixReq, prefixRes } from './http-config';
-import { log } from './log';
+import { logMessage, logErrorMessage } from './log';
 
 @Injectable()
 export class LogHttpInterceptor implements HttpInterceptor {
@@ -29,7 +29,7 @@ export class LogHttpInterceptor implements HttpInterceptor {
   }
 
   private logRequest(req: HttpRequest<any>) {
-    log(`${prefixReq} 📝 Log Http Response`, [
+    logMessage(`${prefixReq} 📝 Log Http Request`, [
       `${req.method} "${req.urlWithParams}"`,
     ]);
   }
@@ -41,7 +41,7 @@ export class LogHttpInterceptor implements HttpInterceptor {
   ) {
     if (event instanceof HttpResponse) {
       const elapsed = Date.now() - started;
-      log(`${prefixRes} 📝 Log Http Response`, [
+      logMessage(`${prefixRes} 📝 Log Http Response`, [
         `HTTP: Response for ${req.urlWithParams}\nreturned with status ${event.status}\nand took ${elapsed} ms`,
       ]);
     }
@@ -53,7 +53,7 @@ export class LogHttpInterceptor implements HttpInterceptor {
   ) {
     if (event instanceof HttpErrorResponse) {
       const elapsed = Date.now() - started;
-      log(`${prefixRes} 🛑 Log Http Response Error`, [
+      logErrorMessage(`${prefixRes} 🛑 Log Http Response Error`, [
         `Http Response Error for ${req.urlWithParams}\nreturned with status ${event.status}\nand took ${elapsed} ms`,
       ]);
     }

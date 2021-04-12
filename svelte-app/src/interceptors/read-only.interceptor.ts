@@ -1,6 +1,7 @@
 import axios, { AxiosError, AxiosRequestConfig } from 'axios';
 import { logError, prefixReq } from './http-config';
 import * as sessionService from '../store/session.service';
+import { logErrorMessage, logMessage } from './log';
 
 export function readOnlyInterceptor() {
   axios.interceptors.request.use(
@@ -9,18 +10,11 @@ export function readOnlyInterceptor() {
       const isGet = config.method.toLowerCase() !== 'get';
       if (!isGet && enforceReadOnly && !okIfReadOnly(config)) {
         const msg = `Can't ${config.method} ${config.url} when read-only`;
-
-        console.groupCollapsed(`${prefixReq} Read-Only`);
-        console.error(msg);
-        console.groupEnd();
-
+        logErrorMessage(`${prefixReq} 👓 Read-Only`, [msg]);
         const err = new Error(msg) as AxiosError;
         return Promise.reject(err);
       }
-      console.groupCollapsed(`${prefixReq} 👓 Read-Only`);
-      console.log(`Pass`);
-      console.groupEnd();
-
+      logMessage(`${prefixReq} 👓 Read-Only`, ['Pass. Data is not read-only']);
       return config;
     },
     (error) => {

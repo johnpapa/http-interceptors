@@ -2,6 +2,7 @@ import { navigate } from 'svelte-routing';
 import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
 import { prefixReq } from './http-config';
 import * as sessionService from '../store/session.service';
+import { logMessage } from './log';
 
 export function authInterceptor() {
   axios.interceptors.request.use((config: AxiosRequestConfig) => {
@@ -9,10 +10,7 @@ export function authInterceptor() {
     if (accessToken) {
       config.headers.Authorization = `Bearer ${accessToken}`;
       config.withCredentials = true;
-
-      console.groupCollapsed(`${prefixReq} 🔑 Auth`);
-      console.log(`Adding Auth header`);
-      console.groupEnd();
+      logMessage(`${prefixReq} 🔑 Auth`, [`Adding Auth header`]);
     }
 
     return config;
@@ -28,7 +26,6 @@ export function authInterceptor() {
         } else {
           navigate('/authfailed');
         }
-        console.warn('should not reach here?');
         return Promise.resolve(true);
       }
       return Promise.reject(error);

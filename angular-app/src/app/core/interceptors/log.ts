@@ -1,4 +1,4 @@
-export function log(group: string, messages: string[], tables?: any[]) {
+export function logMessage(group: string, messages: any[], tables?: any[]) {
   console.groupCollapsed(group);
   messages.forEach((m) => console.log(m));
   if (tables?.length) {
@@ -7,7 +7,11 @@ export function log(group: string, messages: string[], tables?: any[]) {
   console.groupEnd();
 }
 
-export function logError(group: string, messages: string[], tables?: any[]) {
+export function logErrorMessage(
+  group: string,
+  messages: any[],
+  tables?: any[],
+) {
   console.groupCollapsed(group);
   messages.forEach((m) => console.error(m));
   if (tables?.length) {

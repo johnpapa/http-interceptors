@@ -7,7 +7,7 @@ import {
 import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { prefixReq } from './http-config';
-import { log } from './log';
+import { logMessage } from './log';
 
 @Injectable()
 export class LogHeadersInterceptor implements HttpInterceptor {
@@ -27,7 +27,7 @@ export class LogHeadersInterceptor implements HttpInterceptor {
     req.headers.keys().map((key) => {
       headerList.push({ key, values: req.headers.getAll(key).toString() });
     });
-    log(
+    logMessage(
       `${prefixReq} ⚽️ Headers`,
       [`${req.method} "${req.urlWithParams}"`],
       [headerList],

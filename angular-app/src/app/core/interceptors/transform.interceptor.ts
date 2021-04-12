@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { prefixRes } from './http-config';
-import { log } from './log';
+import { logMessage } from './log';
 
 @Injectable()
 export class TransformInterceptor implements HttpInterceptor {
@@ -21,7 +21,7 @@ export class TransformInterceptor implements HttpInterceptor {
       map((event) => {
         if (event instanceof HttpResponse) {
           const body = event.body?.data;
-          log(`${prefixRes} 🚧 Transform Response`, [], [body]);
+          logMessage(`${prefixRes} 🚧 Transform Response`, [], [body]);
           if (body) {
             return event.clone({ body });
           }

@@ -7,7 +7,7 @@ import {
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { prefixReq } from './http-config';
-import { log } from './log';
+import { logMessage } from './log';
 
 @Injectable({ providedIn: 'root' })
 export class CSRFInterceptor implements HttpInterceptor {
@@ -17,7 +17,7 @@ export class CSRFInterceptor implements HttpInterceptor {
   ): Observable<HttpEvent<any>> {
     let token = 'your-csrf-token-goes-here';
     const clonedReq = req.clone({ setHeaders: { 'x-csrf-token': token } });
-    log(`${prefixReq} 🦹‍♀️ CSRF`, [`Adding CSRF header`, token]);
+    logMessage(`${prefixReq} 🦹‍♀️ CSRF`, [`Adding CSRF header`, token]);
     return next.handle(clonedReq);
   }
 }

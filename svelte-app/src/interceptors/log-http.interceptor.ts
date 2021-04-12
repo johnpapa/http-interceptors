@@ -6,6 +6,7 @@ import {
   prefixReq,
   prefixRes,
 } from './http-config';
+import { logMessage } from './log';
 
 export function logHttpInterceptor() {
   axios.interceptors.request.use(
@@ -31,27 +32,22 @@ export function logHttpInterceptor() {
   );
 
   function logRequest(config: AxiosRequestConfig) {
-    console.groupCollapsed(`${prefixReq} 📝 Log Http Request`);
-    console.log(`${config.method} "${config.url}"`);
-    console.groupEnd();
+    logMessage(`${prefixReq} 📝 Log Http Request`, [
+      `${config.method} "${config.url}"`,
+    ]);
     return config;
   }
 
   function logResponse(response: AxiosResponseExtended) {
-    try {
-      console.groupCollapsed(`${prefixRes} 📝 Log Http Response`);
-      if (!response) {
-        console.log(`HTTP: Response returned`);
-      } else {
-        const { config, status } = response;
-        const started = config.meta.started;
-        const elapsed = Date.now() - started;
-        console.log(
-          `HTTP: Response for ${config?.url}\nreturned with status ${status}\nand took ${elapsed} ms`,
-        );
-      }
-    } finally {
-      console.groupEnd();
+    if (!response && !response?.config) {
+      logMessage(`${prefixRes} 📝 Log Http Response`, [`response returned`]);
+    } else {
+      const { config, status } = response;
+      const { started } = config.meta;
+      const elapsed = Date.now() - started;
+      logMessage(`${prefixRes} 📝 Log Http Response`, [
+        `HTTP: Response for ${config?.url}\nreturned with status ${status}\nand took ${elapsed} ms`,
+      ]);
     }
 
     return response;

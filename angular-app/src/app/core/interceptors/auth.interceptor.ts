@@ -12,7 +12,7 @@ import { SessionService } from '../session.service';
 import { prefixReq } from './http-config';
 import { catchError } from 'rxjs/operators';
 import { Router } from '@angular/router';
-import { log } from './log';
+import { logMessage } from './log';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
@@ -33,7 +33,7 @@ export class AuthInterceptor implements HttpInterceptor {
         },
         withCredentials: true,
       });
-      log(`${prefixReq} 🔑 Auth`, [`Adding Auth header`]);
+      logMessage(`${prefixReq} 🔑 Auth`, [`Adding Auth header`]);
     } else {
       authReq = req.clone();
     }

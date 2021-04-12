@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 import { BusyService } from '../busy.service';
 import { finalize } from 'rxjs/operators';
 import { prefixReq, prefixRes } from './http-config';
-import { log } from './log';
+import { logMessage } from './log';
 
 @Injectable()
 export class BusyInterceptor implements HttpInterceptor {
@@ -20,12 +20,16 @@ export class BusyInterceptor implements HttpInterceptor {
     next: HttpHandler,
   ): Observable<HttpEvent<any>> {
     const msg = req.method === 'GET' ? 'Loading ...' : 'Saving ...';
-    log(`${prefixReq} ⚙️ Busy Spinner`, ['Incrementing the busy spinner']);
+    logMessage(`${prefixReq} ⚙️ Busy Spinner`, [
+      'Incrementing the busy spinner',
+    ]);
     this.busyService.increment(msg);
     return next.handle(req).pipe(
       finalize(() => {
         this.busyService.decrement();
-        log(`${prefixRes} ⚙️ Busy Spinner`, ['Decrementing the busy spinner']);
+        logMessage(`${prefixRes} ⚙️ Busy Spinner`, [
+          'Decrementing the busy spinner',
+        ]);
       }),
     );
   }

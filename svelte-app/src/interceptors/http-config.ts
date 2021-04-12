@@ -1,4 +1,5 @@
 import { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
+import { logErrorMessage } from './log';
 
 export const prefixReq = '⬇ -';
 export const prefixRes = '⬆ -';
@@ -16,11 +17,10 @@ export interface AxiosResponseExtended extends AxiosResponse {
 }
 
 export function logError(error: AxiosError) {
-  console.groupCollapsed(`${prefixRes} 🛑 Log Http Response Error`);
   const msg =
     error.config && error.response
       ? `Http Response Error for ${error?.config?.url}\nreturned with status ${error?.response?.status}\n${error}`
       : error;
-  console.error(msg);
-  console.groupEnd();
+
+  logErrorMessage(`${prefixRes} 🛑 Log Http Response Error`, [msg]);
 }
