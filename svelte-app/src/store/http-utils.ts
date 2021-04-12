@@ -1,7 +1,7 @@
 import { AxiosResponse } from 'axios';
 
 export const parseList = <T>(response: AxiosResponse) => {
-  if (!response) {
+  if (!response || !response?.status) {
     return [];
   }
   if (response?.status !== 200)

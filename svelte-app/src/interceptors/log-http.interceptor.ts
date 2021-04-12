@@ -39,11 +39,11 @@ export function logHttpInterceptor() {
   }
 
   function logResponse(response: AxiosResponseExtended) {
-    if (!response && !response?.config) {
+    if (!response || !response?.config) {
       logMessage(`${prefixRes} 📝 Log Http Response`, [`response returned`]);
     } else {
       const { config, status } = response;
-      const { started } = config.meta;
+      const { started } = config?.meta;
       const elapsed = Date.now() - started;
       logMessage(`${prefixRes} 📝 Log Http Response`, [
         `HTTP: Response for ${config?.url}\nreturned with status ${status}\nand took ${elapsed} ms`,
