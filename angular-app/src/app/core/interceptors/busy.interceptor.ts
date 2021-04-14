@@ -24,6 +24,7 @@ export class BusyInterceptor implements HttpInterceptor {
       'Incrementing the busy spinner',
     ]);
     this.busyService.increment(msg);
+
     return next.handle(req).pipe(
       finalize(() => {
         this.busyService.decrement();
