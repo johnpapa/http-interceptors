@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 import { prefixReq } from './http-config';
 import { logMessage } from './log';
 
-@Injectable({ providedIn: 'root' })
+@Injectable()
 export class CSRFInterceptor implements HttpInterceptor {
   intercept(
     req: HttpRequest<any>,
