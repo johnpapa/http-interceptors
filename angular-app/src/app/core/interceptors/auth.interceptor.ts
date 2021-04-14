@@ -35,6 +35,7 @@ export class AuthInterceptor implements HttpInterceptor {
       });
       logMessage(`${prefixReq} 🔑 Auth`, [`Adding Auth header`]);
     } else {
+      logMessage(`${prefixReq} 🔑 Auth`, [`No Auth Token to add`]);
       authReq = req.clone();
     }
 

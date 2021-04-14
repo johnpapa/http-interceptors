@@ -11,6 +11,8 @@ export function authInterceptor() {
       config.headers.Authorization = `Bearer ${accessToken}`;
       config.withCredentials = true;
       logMessage(`${prefixReq} 🔑 Auth`, [`Adding Auth header`]);
+    } else {
+      logMessage(`${prefixReq} 🔑 Auth`, [`No Auth Token to add`]);
     }
 
     return config;
