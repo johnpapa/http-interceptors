@@ -1,4 +1,4 @@
-import axios, { AxiosResponse } from 'axios';
+import axios, { type AxiosResponse } from 'axios';
 import { prefixRes } from './http-config';
 import { logMessage } from './log';
 

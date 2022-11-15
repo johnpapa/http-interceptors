@@ -1,7 +1,7 @@
-import axios, { AxiosRequestConfig } from 'axios';
+import axios, { type AxiosRequestConfig } from 'axios';
 import {
-  AxiosRequestConfigExtended,
-  AxiosResponseExtended,
+  type AxiosRequestConfigExtended,
+  type AxiosResponseExtended,
   logError,
   prefixReq,
   prefixRes,

@@ -1,4 +1,4 @@
-import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
+import axios, { type AxiosRequestConfig, type AxiosResponse } from 'axios';
 import { prefixReq, prefixRes } from './http-config';
 import * as busyService from '../store/busy.service';
 import { logMessage } from './log';

@@ -1,4 +1,4 @@
-import { BusyState, notBusyPayload } from '../models';
+import { type BusyState, notBusyPayload } from '../models';
 import * as store from './store';
 
 let busyCounter = 0;

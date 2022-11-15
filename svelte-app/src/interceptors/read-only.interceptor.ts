@@ -1,4 +1,4 @@
-import axios, { AxiosError, AxiosRequestConfig } from 'axios';
+import axios, { type AxiosError, type AxiosRequestConfig } from 'axios';
 import { logError, prefixReq } from './http-config';
 import * as sessionService from '../store/session.service';
 import { logErrorMessage, logMessage } from './log';

@@ -1,5 +1,9 @@
 import { navigate } from 'svelte-routing';
-import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
+import axios, {
+  type AxiosError,
+  type AxiosRequestConfig,
+  type AxiosResponse,
+} from 'axios';
 import { prefixReq } from './http-config';
 import * as sessionService from '../store/session.service';
 import { logMessage } from './log';

@@ -4,7 +4,7 @@
   import Heroes from './heroes/Heroes.svelte';
   import Home from './Home.svelte';
   import Movies from './Movies.svelte';
-  import Villains from './villains/villains.svelte';
+  import Villains from './villains/Villains.svelte';
   import { state } from './store';
 
   import {

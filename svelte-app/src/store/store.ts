@@ -1,6 +1,6 @@
-import { Writable, writable } from 'svelte/store';
-import { Movie, Hero, BusyState, notBusyPayload, Villain } from '../models';
-import { SessionState } from './session.service';
+import { type Writable, writable } from 'svelte/store';
+import { Movie, Hero, type BusyState, notBusyPayload, Villain } from '../models';
+import type { SessionState } from './session.service';
 
 const emptySessionPayload: SessionState = {
   loggedIn: false,

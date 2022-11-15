@@ -41,7 +41,7 @@
         <Link to="/signin" {getProps}><span>Sign in</span></Link>
       {/if}
       {#if $session.loggedIn}
-        <div class="auth-link" on:click={signout}>
+        <div class="auth-link" on:click={signout} on:keypress={signout}>
           <span>Sign Out</span>
         </div>
       {/if}
