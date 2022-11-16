@@ -17,7 +17,7 @@ export default defineConfig({
 
       preprocess: sveltePreprocess({
         scss: {
-          includePaths: ['src/styles'],
+          // includePaths: ['src/styles'],
 
           prependData: `
             @import "variables.scss";

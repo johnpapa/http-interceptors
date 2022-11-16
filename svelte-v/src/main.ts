@@ -1,6 +1,6 @@
-import './styles/app.scss';
-import './styles/global.css';
-import './styles/styles.scss';
+import './app.scss';
+import './global.css';
+import './styles.scss';
 import App from './App.svelte';
 
 const app = new App({
