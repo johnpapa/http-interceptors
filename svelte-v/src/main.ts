@@ -1,5 +1,3 @@
-import './app.scss';
-import './global.css';
 import './styles.scss';
 import App from './App.svelte';
 

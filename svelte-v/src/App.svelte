@@ -1,4 +1,6 @@
 <script lang="ts">
+  import './styles.scss';
+
   import { Router, Route } from 'svelte-routing';
   import Heroes from './heroes/Heroes.svelte';
   import Home from './Home.svelte';

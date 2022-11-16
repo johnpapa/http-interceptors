@@ -21,7 +21,6 @@ export default defineConfig({
 
           prependData: `
             @import "variables.scss";
-            @import "app.scss";
             @import "styles.scss";
           `,
         },
