@@ -12,9 +12,22 @@ export default defineConfig({
   plugins: [
     svelte({
       emitCss: production,
-      preprocess: sveltePreprocess(),
+
+      // preprocess sass and scss files
+
+      preprocess: sveltePreprocess({
+        scss: {
+          includePaths: ['src/styles'],
+
+          prependData: `
+            @import "variables.scss";
+            @import "app.scss";
+            @import "styles.scss";
+          `,
+        },
+      }),
+
       compilerOptions: {
-        // filename: 'bundle.js',
         outputFilename: 'bundle.js',
         cssOutputFilename: 'bundle.css',
         dev: !production,
