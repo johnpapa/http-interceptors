@@ -6,6 +6,7 @@ const DEV: boolean = true;
 
 function logRouteLocation(location: Object) {
   console.log(DEV);
+  console.table(location);
   // if (process.env.ROLLUP_WATCH) {
   //   console.table(location);
   // }
