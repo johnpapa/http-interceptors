@@ -43,7 +43,7 @@
     "json-server-auth": "^2.0.2",
     "json-server-reset": "^1.0.0",
     "karma": "~6.3.0",
-    "karma-chrome-launcher": "~3.1.0",
+    "karma-chrome-launcher": "~3.2.0",
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "~1.7.0",
     "source-map-explorer": "^2.5.2",
