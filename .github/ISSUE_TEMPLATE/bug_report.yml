@@ -1,0 +1,42 @@
+name: 🐛 Bug Report
+description: Report a bug in one of the demo apps
+labels: ["bug"]
+body:
+  - type: dropdown
+    id: app
+    attributes:
+      label: Which app?
+      options:
+        - angular-app
+        - angular-http-hard-way
+        - svelte-app
+        - All apps
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: Describe the bug
+      placeholder: What happened? What did you expect?
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. cd angular-app && npm run full-stack
+        2. Navigate to /heroes
+        3. ...
+    validations:
+      required: true
+  - type: input
+    id: node-version
+    attributes:
+      label: Node.js version
+      placeholder: "e.g., 18.17.0"
+  - type: input
+    id: os
+    attributes:
+      label: Operating system
+      placeholder: "e.g., macOS 14, Ubuntu 22.04"

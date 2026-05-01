@@ -1,0 +1,24 @@
+# Copilot cloud agent setup steps
+# Installs dependencies for all apps so the agent can build and test
+
+name: "Copilot Setup Steps"
+on: workflow_dispatch
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "18"
+
+      - name: Install dependencies — angular-app
+        run: cd angular-app && npm ci --ignore-scripts
+
+      - name: Install dependencies — angular-http-hard-way
+        run: cd angular-http-hard-way && npm ci --ignore-scripts
+
+      - name: Install dependencies — svelte-app
+        run: cd svelte-app && npm ci --ignore-scripts

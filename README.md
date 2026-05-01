@@ -1,5 +1,7 @@
 # Tour of Heroes, the Movie Edition - Http Interceptors Demo
 
+[![AI-Ready](https://img.shields.io/badge/AI--Ready-Copilot-blue?logo=github)](https://github.com/johnpapa/http-interceptors)
+
 The Web apps in this monorepo make HTTP requests and require uniform consistency in how they are executed and handled.
 
 This monorepo demonstrates the same app written with Angular and with Svelte. Each app uses HTTP interceptors. The Angular app uses HttpClient and its interceptors while the Svelte app uses Axios and its interceptors.
