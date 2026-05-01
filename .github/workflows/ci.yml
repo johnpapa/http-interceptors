@@ -1,0 +1,57 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+jobs:
+  angular-app:
+    name: Angular App
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: angular-app
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "18"
+          cache: npm
+          cache-dependency-path: angular-app/package-lock.json
+      - run: npm ci
+      - run: npm run build
+
+  angular-http-hard-way:
+    name: Angular HTTP Hard Way
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: angular-http-hard-way
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "18"
+          cache: npm
+          cache-dependency-path: angular-http-hard-way/package-lock.json
+      - run: npm ci
+      - run: npm run build
+
+  svelte-app:
+    name: Svelte App
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: svelte-app
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "18"
+          cache: npm
+          cache-dependency-path: svelte-app/package-lock.json
+      - run: npm ci
+      - run: npm run build
+      - run: npm run check
