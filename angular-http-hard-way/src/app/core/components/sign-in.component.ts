@@ -7,6 +7,7 @@ import { SessionService } from '../session.service';
 const captains = console;
 
 @Component({
+  standalone: false,
   template: `
     <div class="card signin">
       <header class="card-header">

@@ -8,6 +8,7 @@ import {
 import { Hero } from '../core';
 
 @Component({
+  standalone: false,
   selector: 'app-hero-list',
   template: `
     <div *ngIf="errorMessage">

@@ -4,6 +4,7 @@ import { Hero } from '../core';
 import { HeroService } from './hero.service';
 
 @Component({
+  standalone: false,
   selector: 'app-heroes',
   template: `
     <div class="content-container">

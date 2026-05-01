@@ -8,6 +8,7 @@ import {
 import { Villain } from '../core';
 
 @Component({
+  standalone: false,
   selector: 'app-villain-list',
   template: `
     <div *ngIf="errorMessage">

@@ -4,6 +4,7 @@ import { delay, observeOn } from 'rxjs/operators';
 import { asapScheduler } from 'rxjs';
 
 @Component({
+  standalone: false,
   selector: 'app-root',
   template: `
     <div>

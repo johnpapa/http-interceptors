@@ -4,6 +4,7 @@ import { Villain } from '../core';
 import { VillainService } from './villain.service';
 
 @Component({
+  standalone: false,
   selector: 'app-Villains',
   template: `
     <div class="content-container">
