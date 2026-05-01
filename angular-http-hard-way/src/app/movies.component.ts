@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { MovieService } from './movie.service';
 
 @Component({
+  standalone: false,
   selector: 'app-movie',
   template: `
     <div class="container columns">

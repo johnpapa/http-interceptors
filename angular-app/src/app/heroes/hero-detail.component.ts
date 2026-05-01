@@ -11,6 +11,7 @@ import {
 import { Hero } from '../core';
 
 @Component({
+  standalone: false,
   selector: 'app-hero-detail',
   template: `
     <div class="card edit-detail">

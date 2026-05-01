@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 
 @Component({
+  standalone: false,
   selector: 'app-button-footer',
   template: `
     <button

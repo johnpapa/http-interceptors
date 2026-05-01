@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
+  standalone: false,
   selector: 'app-header-bar-brand',
   template: `
     <div class="navbar-brand">

@@ -18,7 +18,7 @@ import { SharedModule } from './shared/shared.module';
     BrowserModule,
     SharedModule,
     HttpClientModule,
-    RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy' }),
+    RouterModule.forRoot(routes),
     AppStoreModule,
     externalModules,
   ],

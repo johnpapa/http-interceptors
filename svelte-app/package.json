@@ -12,29 +12,29 @@
     "backend": "json-server-auth --watch db.json --routes routes.json --port 5001 --delay 1000 --middlewares ./node_modules/json-server-reset"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-svg-core": "^1.2.35",
-    "@fortawesome/free-solid-svg-icons": "^5.15.3",
-    "axios": "^0.21.1",
-    "sirv-cli": "^1.0.0"
+    "@fortawesome/fontawesome-svg-core": "^6.5.0",
+    "@fortawesome/free-solid-svg-icons": "^6.5.0",
+    "axios": "^1.7.0",
+    "sirv-cli": "^3.0.0"
   },
   "devDependencies": {
-    "@sveltejs/vite-plugin-svelte": "^1.1.0",
-    "@tsconfig/svelte": "^3.0.0",
+    "@sveltejs/vite-plugin-svelte": "^3.1.0",
+    "@tsconfig/svelte": "^5.0.0",
     "autoprefixer": "^10.4.13",
-    "concurrently": "^6.0.0",
+    "concurrently": "^9.0.0",
     "json-server": "^0.17.1",
     "json-server-auth": "^2.1.0",
     "json-server-reset": "^1.3.3",
-    "prettier": "^2.2.1",
-    "query-string": "^7.0.0",
-    "sass": "^1.53.0",
-    "svelte": "^3.52.0",
-    "svelte-check": "^2.9.2",
-    "svelte-preprocess": "^4.10.7",
-    "svelte-routing": "^1.5.0",
-    "tslib": "^2.4.0",
-    "typescript": "^4.6.4",
-    "vite": "^3.2.3",
+    "prettier": "^3.3.0",
+    "query-string": "^9.0.0",
+    "sass": "^1.77.0",
+    "svelte": "^4.2.0",
+    "svelte-check": "^3.8.0",
+    "svelte-preprocess": "^5.1.0",
+    "svelte-routing": "^2.13.0",
+    "tslib": "^2.6.0",
+    "typescript": "^5.5.0",
+    "vite": "^5.4.0",
     "bulma": "^0.9.4"
   }
 }

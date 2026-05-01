@@ -6,6 +6,7 @@ import { SessionService } from '../session.service';
 const captains = console;
 
 @Component({
+  standalone: false,
   selector: 'app-nav',
   template: `
     <nav class="menu">

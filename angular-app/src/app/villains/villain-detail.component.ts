@@ -11,6 +11,7 @@ import {
 import { Villain } from '../core';
 
 @Component({
+  standalone: false,
   selector: 'app-villain-detail',
   template: `
     <div class="card edit-detail">

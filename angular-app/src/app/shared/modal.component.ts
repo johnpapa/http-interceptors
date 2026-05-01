@@ -1,6 +1,7 @@
 import { Component, EventEmitter, OnInit, Input, Output } from '@angular/core';
 
 @Component({
+  standalone: false,
   selector: 'app-modal',
   template: `
     <div class="modal" [ngClass]="{ 'is-active': this.isOpen }">
