@@ -20,7 +20,7 @@
   "devDependencies": {
     "@sveltejs/vite-plugin-svelte": "^1.1.0",
     "@tsconfig/svelte": "^3.0.0",
-    "autoprefixer": "^10.4.13",
+    "autoprefixer": "^10.5.0",
     "concurrently": "^6.0.0",
     "json-server": "^0.17.1",
     "json-server-auth": "^2.1.0",
